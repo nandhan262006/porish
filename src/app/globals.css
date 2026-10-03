@@ -1,222 +1,211 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f4ee;
-  --foreground: #171717;
-  --muted: #6f6a63;
-  --line: #d8d1c7;
-  --beige: #e9e2d5;
-  --turquoise: #2ea9b0;
+  --background: #f6f1ea;
+  --foreground: #1a1410;
+  --muted: #6d6258;
+  --terracotta: #9c4a2e;
+  --cream: #fffaf4;
+  --line: rgba(26, 20, 16, 0.12);
+  --ink: #1a1410;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-terracotta: var(--terracotta);
+  --color-cream: var(--cream);
   --color-line: var(--line);
-  --color-beige: var(--beige);
-  --color-turquoise: var(--turquoise);
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-editorial), Georgia, "Times New Roman", serif;
-  --font-script: var(--font-script), cursive;
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  overflow-x: clip;
+* {
+  box-sizing: border-box;
 }
 
 html {
-  overflow-x: clip;
+  scroll-behavior: smooth;
 }
 
-/* ---------- editorial primitives ---------- */
-
-.nav-link {
-  position: relative;
-  font-size: 0.6875rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+body {
+  margin: 0;
+  background: var(--background);
   color: var(--foreground);
-  transition: color 0.3s ease;
-}
-.nav-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  height: 1px;
-  width: 100%;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.35s ease;
-}
-.nav-link:hover {
-  color: var(--muted);
-}
-.nav-link:hover::after {
-  transform: scaleX(1);
+  font-family: var(--font-sans), Inter, system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
 }
 
-.eyebrow {
-  font-size: 0.6875rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--muted);
+body,
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  /* No `color` here on purpose: Tailwind v4 puts utilities in
+     `@layer utilities`, and unlayered CSS beats layered CSS at any
+     specificity — `color: inherit` was silently killing every `text-*`
+     class on links (e.g. cream text on the dark CTA buttons). Preflight
+     already resets link color inside the base layer. */
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+::selection {
+  background: #9c4a2e;
+  color: #fffaf4;
+}
+
+:focus-visible {
+  outline: 2px solid #9c4a2e;
+  outline-offset: 3px;
 }
 
 .serif-display {
-  font-family: var(--font-editorial), Georgia, "Times New Roman", serif;
-  font-weight: 300;
-  letter-spacing: -0.01em;
+  font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
 }
 
 .script-note {
-  font-family: var(--font-script), cursive;
-  color: var(--muted);
+  font-family: var(--font-serif), Georgia, serif;
   font-style: italic;
+  font-weight: 500;
+  color: var(--terracotta);
+  letter-spacing: 0;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--terracotta);
 }
 
 .thin-rule {
   height: 1px;
-  background: var(--line);
+  background: var(--terracotta);
+  opacity: 0.7;
 }
 
-/* subtle reveal */
+.photo {
+  overflow: hidden;
+  background: #e7ddd2;
+}
+
+.nav-link {
+  position: relative;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(26, 20, 16, 0.62);
+  transition: color 180ms ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--foreground);
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 1px;
+  background: var(--terracotta);
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(14px);
   transition:
-    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
 }
+
 .reveal.is-visible {
   opacity: 1;
   transform: none;
 }
 
-/* photo hover: very slight zoom inside fixed frame */
-.photo {
-  overflow: hidden;
-  display: block;
-}
-.photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.photo:hover img {
-  transform: scale(1.03);
-}
-.photo::after {
-  /* keeps 2D flat feel: hairline inner edge like a printed magazine plate */
-  content: "";
-  position: absolute;
-  inset: 0;
-  box-shadow: inset 0 0 0 1px rgb(23 23 23 / 0.04);
-  pointer-events: none;
-}
-
-/* very subtle botanical corner decoration */
-.botanical {
-  color: #d9cfbe;
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-/* ---------- horizontal story rail (hero) ---------- */
-
-.hero-rail {
-  position: relative;
-  /* full-bleed: cards run off both viewport edges */
-  width: 100vw;
-  margin-inline: calc(50% - 50vw);
-}
-
-.hero-rail__track {
-  --rail-pad: 1.5rem;
-  display: flex;
-  gap: 1.25rem;
-  padding-inline: var(--rail-pad);
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--rail-pad);
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-  user-select: none;
-}
-.hero-rail__track::-webkit-scrollbar {
-  display: none;
-}
-@media (min-width: 768px) {
-  .hero-rail__track {
-    --rail-pad: 2.5rem;
+/* Hero-10 style entrance: rise + fade with per-element stagger via
+   inline animation-delay. Opacity-only after the first frame is avoided
+   on purpose — keep the `to` keyframe transform-free of layout props. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
-@media (min-width: 1360px) {
-  /* keep first card aligned with the centered page container */
-  .hero-rail__track {
-    --rail-pad: calc((100vw - 1360px) / 2 + 2.5rem);
-  }
-}
-@media (hover: hover) and (pointer: fine) {
-  .hero-rail__track {
-    cursor: grab;
-  }
-}
-.hero-rail__track.is-dragging {
-  cursor: grabbing;
-}
 
-a:focus-visible,
-button:focus-visible {
-  outline: 1px solid var(--foreground);
-  outline-offset: 4px;
-}
-
-/* soft edge fades — visible only while more cards exist on that side */
-.rail-fade {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: clamp(2.5rem, 6vw, 5rem);
+.hero-rise {
   opacity: 0;
-  pointer-events: none;
-  z-index: 2;
-  transition: opacity 0.35s ease;
-}
-.rail-fade.is-on {
-  opacity: 1;
-}
-.rail-fade--left {
-  left: 0;
-  background: linear-gradient(to right, var(--background) 40%, transparent);
-}
-.rail-fade--right {
-  right: 0;
-  background: linear-gradient(to left, var(--background) 40%, transparent);
+  animation: hero-rise 650ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-rise {
+    opacity: 1;
+    animation: none;
+  }
+}
+
+/* Carousel caption: replays on every active-card change via React key. */
+@keyframes caption-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.caption-fade {
+  animation: caption-fade 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caption-fade {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .reveal {
     opacity: 1;
     transform: none;
     transition: none;
   }
-  .photo img,
-  .nav-link::after {
-    transition: none;
-  }
-  .hero-rail__track {
-    scroll-behavior: auto;
-  }
-  .rail-fade {
-    transition: none;
+}
+
+@media (max-width: 767px) {
+  html,
+  body {
+    overflow-x: hidden;
   }
 }

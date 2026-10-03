@@ -1,43 +1,39 @@
 import type { Metadata } from "next";
-import { Geist, Cormorant_Garamond, Italianno } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-serif",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const editorial = Cormorant_Garamond({
-  variable: "--font-editorial",
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  style: ["normal", "italic"],
-});
-
-const script = Italianno({
-  variable: "--font-script",
-  subsets: ["latin"],
-  weight: "400",
 });
 
 export const metadata: Metadata = {
-  title: "Phorish Shoots — Wedding & Editorial Photography, India",
+  title: "Phorish Shoots | Wedding Photography",
   description:
-    "Documentary, candid and editorial wedding photography based in India. Real people, real emotions, timeless memories.",
+    "Phorish Shoots captures weddings, pre-weddings, newborn stories and timeless memories.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${editorial.variable} ${script.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
+    <html lang="en">
+      <body className={`${cormorant.variable} ${inter.variable} bg-background text-foreground antialiased`}>
         <Header />
-        <div className="flex-1">{children}</div>
+        {children}
         <Footer />
+        <WhatsAppFloat />
       </body>
     </html>
   );

@@ -14,7 +14,7 @@ const COVERS = ["Weddings", "Pre-Weddings", "New Born", "Modeling", "Editorials"
 
 export default function AboutPage() {
   return (
-    <main className="mx-auto w-full max-w-[1360px] px-6 md:px-10">
+    <main className="mx-auto w-full max-w-[1360px] px-5 md:px-10">
       <section className="pt-16 text-center md:pt-24">
         <Reveal>
           <p className="eyebrow">About</p>
@@ -32,7 +32,7 @@ export default function AboutPage() {
           <Reveal className="md:col-span-5">
             <figure className="photo relative mx-auto aspect-[4/5] max-w-[520px]">
               <Image
-                src="/about.png"
+                src="/ABOUT.png"
                 alt="Harish Pipari and Dhanyasri Pipari"
                 fill
                 priority
@@ -127,8 +127,8 @@ export default function AboutPage() {
                 ↗
               </span>
             </a>
-            <Link href="/" className="nav-link">
-              ← Home
+            <Link href="/client-area" className="nav-link">
+              Client area
             </Link>
           </div>
         </Reveal>

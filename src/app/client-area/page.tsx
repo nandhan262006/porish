@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function ClientAreaPage() {
   return (
-    <main className="mx-auto w-full max-w-[1360px] px-6 md:px-10">
+    <main className="mx-auto w-full max-w-[1360px] px-5 md:px-10">
       <section className="pt-16 text-center md:pt-24">
         <Reveal>
           <p className="eyebrow">Client Area</p>
@@ -67,8 +67,8 @@ export default function ClientAreaPage() {
           </Reveal>
 
           <Reveal delay={200} className="mt-8">
-            <Link href="/" className="nav-link">
-              ← Home
+            <Link href="/about" className="nav-link">
+              About the studio
             </Link>
           </Reveal>
         </div>
