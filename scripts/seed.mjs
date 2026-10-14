@@ -114,10 +114,10 @@ const SETTINGS = {
   hero_h1_a: "Real people, real emotions,",
   hero_h1_b: "timeless memories.",
   hero_sub:
-    "Harish & Dhanyasri Pipari — documentary wedding photographers in Nizamabad, Telangana. 100+ weddings, pre-weddings, newborn & family stories across Hyderabad and India, shot as they unfold.",
+    "Harish & Dhanyasri Pippari — documentary wedding photographers in Nizamabad, Telangana. 100+ weddings, pre-weddings, newborn & family stories across Hyderabad and India, shot as they unfold.",
   hero_proof:
     "100+ weddings since 2020 · Photo Parivaar award-winners · 4.9 ★ from 85 Google reviews",
-  about_names: "Harish Pipari & Dhanyasri Pipari",
+  about_names: "Harish Pippari & Dhanyasri Pippari",
   about_p1:
     "What began in 2018 with a single Canon 200D bought for ₹20,000 is now Phorish Shoots — a Nizamabad studio run by siblings Harish & Dhanyasri. Since 2020 we've covered 100+ weddings across India, from intimate birthdays to a five-star wedding at AVASA, Hyderabad.",
   about_p2:
@@ -215,7 +215,7 @@ async function main() {
   }
   // Copy refresh: only overwrite rows still holding the old Phase-1 defaults.
   const COPY_FIXES = [
-    ["hero_sub", "Harish & Dhanyasri Pipari — documentary wedding photographers in Nizamabad. 100+ weddings across Telangana & India since 2020.", SETTINGS.hero_sub],
+    ["hero_sub", "Harish & Dhanyasri Pippari — documentary wedding photographers in Nizamabad. 100+ weddings across Telangana & India since 2020.", SETTINGS.hero_sub],
     ["hero_proof", "100+ weddings · Documentary · 4.9 ★ from 85 reviews", SETTINGS.hero_proof],
   ];
   for (const [key, oldValue, newValue] of COPY_FIXES) {
@@ -225,6 +225,12 @@ async function main() {
     });
   }
   await db.execute(`DELETE FROM site_settings WHERE key='hero_h1' AND value='Real people, real emotions, timeless memories.'`);
+
+  // Name spelling fix: "Pipari" → "Pippari" in any stored copy.
+  await db.execute({
+    sql: `UPDATE site_settings SET value=REPLACE(value,'Pipari','Pippari'), updated_at=? WHERE value LIKE '%Pipari%'`,
+    args: [t],
+  });
 
   const tileCount = Number((await db.execute(`SELECT COUNT(*) AS n FROM home_tiles`)).rows[0]?.n ?? 0);
   if (!tileCount) {

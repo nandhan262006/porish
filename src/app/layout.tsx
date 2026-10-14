@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   description:
     "Phorish Shoots — documentary wedding photographer in Nizamabad, Telangana. Weddings, pre-wedding shoots, newborn, toddler & modeling portraits across Hyderabad & India. 100+ weddings since 2020. Rated 4.9 from 85 Google reviews.",
   keywords: CORE_KEYWORDS,
-  authors: [{ name: "Harish Pipari" }, { name: "Dhanyasri Pipari" }],
+  authors: [{ name: "Harish Pippari" }, { name: "Dhanyasri Pippari" }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
   category: "Photography",
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
         url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Harish Pipari and Dhanyasri Pipari — Phorish Shoots wedding photographers",
+        alt: "Harish Pippari and Dhanyasri Pippari — Phorish Shoots wedding photographers",
       },
     ],
   },
@@ -128,8 +128,8 @@ const STUDIO_SCHEMA = {
   },
   sameAs: [INSTAGRAM, YOUTUBE, MAPS_URL],
   founder: [
-    { "@type": "Person", name: "Harish Pipari" },
-    { "@type": "Person", name: "Dhanyasri Pipari" },
+    { "@type": "Person", name: "Harish Pippari" },
+    { "@type": "Person", name: "Dhanyasri Pippari" },
   ],
   aggregateRating: {
     "@type": "AggregateRating",

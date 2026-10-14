@@ -32,6 +32,6 @@ export const CORE_KEYWORDS = [
   "candid wedding photographer India",
   "documentary wedding photography",
   "Phorish Shoots",
-  "Harish Pipari",
-  "Dhanyasri Pipari",
+  "Harish Pippari",
+  "Dhanyasri Pippari",
 ];

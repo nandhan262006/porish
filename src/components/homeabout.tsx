@@ -25,13 +25,13 @@ export default function HomeAbout({
         <figure className="photo relative aspect-[4/5] md:col-span-5">
           <Image
             src={image}
-            alt="Harish Pipari and Dhanyasri Pipari — documentary wedding photographers in Nizamabad"
+            alt="Harish Pippari and Dhanyasri Pippari — documentary wedding photographers in Nizamabad"
             fill
             sizes="(min-width: 768px) 40vw, 100vw"
             className="object-cover"
           />
           <figcaption className="sr-only">
-            Harish Pipari and Dhanyasri Pipari of Phorish Shoots
+            Harish Pippari and Dhanyasri Pippari of Phorish Shoots
           </figcaption>
         </figure>
 

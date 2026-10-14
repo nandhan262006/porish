@@ -11,10 +11,10 @@ import { mediaUrl } from "@/lib/media";
 export const metadata: Metadata = {
   title: "About — Wedding Photographers in Nizamabad",
   description:
-    "Meet Harish Pipari & Dhanyasri Pipari of Phorish Shoots — siblings, documentary wedding photographers in Nizamabad since 2020. From a ₹20,000 Canon 200D to 100+ weddings, AVASA Hyderabad & Photo Parivaar awards.",
+    "Meet Harish Pippari & Dhanyasri Pippari of Phorish Shoots — siblings, documentary wedding photographers in Nizamabad since 2020. From a ₹20,000 Canon 200D to 100+ weddings, AVASA Hyderabad & Photo Parivaar awards.",
   keywords: [
-    "Harish Pipari photographer",
-    "Dhanyasri Pipari",
+    "Harish Pippari photographer",
+    "Dhanyasri Pippari",
     "wedding photographer Nizamabad",
     "documentary wedding photographer India",
     "Phorish Shoots story",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "About Phorish Shoots — Wedding Photographers in Nizamabad",
     description:
       "Two engineers turned storytellers. 100+ weddings across India since 2020 — candid, documentary & cinematic.",
-    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Harish Pipari and Dhanyasri Pipari — Phorish Shoots" }],
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Harish Pippari and Dhanyasri Pippari — Phorish Shoots" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -75,7 +75,7 @@ export default async function AboutPage() {
     "@type": "AboutPage",
     mainEntity: {
       "@type": "Photographer",
-      name: "Phorish Shoots — Harish Pipari & Dhanyasri Pipari",
+      name: "Phorish Shoots — Harish Pippari & Dhanyasri Pippari",
       url: `${SITE_URL}/about-us`,
       image: DEFAULT_OG_IMAGE,
       address: {
@@ -123,14 +123,14 @@ export default async function AboutPage() {
             <figure className="photo relative mx-auto aspect-[4/5] max-w-[520px]">
               <Image
                 src={aboutImage}
-                alt="Harish Pipari and Dhanyasri Pipari — documentary wedding photographers in Nizamabad, Telangana"
+                alt="Harish Pippari and Dhanyasri Pippari — documentary wedding photographers in Nizamabad, Telangana"
                 fill
                 priority
                 sizes="(min-width: 768px) 440px, 90vw"
                 className="object-cover"
               />
               <figcaption className="sr-only">
-                Harish Pipari and Dhanyasri Pipari, founders of Phorish Shoots
+                Harish Pippari and Dhanyasri Pippari, founders of Phorish Shoots
               </figcaption>
             </figure>
           </Reveal>
@@ -142,9 +142,9 @@ export default async function AboutPage() {
                 meet the photographers
               </p>
               <h2 className="serif-display mt-4 text-4xl leading-[1.08] md:text-5xl">
-                Harish Pipari
+                Harish Pippari
                 <br />
-                <span className="italic">&</span> Dhanyasri Pipari
+                <span className="italic">&</span> Dhanyasri Pippari
               </h2>
               <div className="thin-rule mt-7 mb-7 w-16" />
               <div className="max-w-md space-y-5 text-[0.9375rem] leading-7 text-muted">
