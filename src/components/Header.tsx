@@ -61,7 +61,7 @@ export default function Header() {
       >
         {/* 1fr auto 1fr keeps the wordmark dead centre no matter how the two
             link clusters are sized — auto-placement alone would not */}
-        <div className="mx-auto grid h-[72px] max-w-[1360px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 md:px-10">
+        <div className="mx-auto grid h-[96px] max-w-[1360px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 md:px-10">
           <nav aria-label="Primary — galleries" className="hidden items-center gap-6 whitespace-nowrap lg:flex">
             {LEFT_LINKS.map((link) => (
               <Link
@@ -84,10 +84,10 @@ export default function Header() {
             <Image
               src="/logo.png"
               alt="Phorish Shoots — wedding photographer in Nizamabad"
-              width={216}
-              height={72}
+              width={240}
+              height={80}
               priority
-              className={`h-[67px] w-auto transition-[filter] duration-500 ${open ? "brightness-0 invert" : ""}`}
+              className={`h-20 w-auto transition-[filter] duration-500 ${open ? "brightness-0 invert" : ""}`}
             />
           </Link>
 
@@ -141,7 +141,7 @@ export default function Header() {
       >
         <nav
           aria-label="Mobile"
-          className="flex flex-1 flex-col justify-center gap-0.5 overflow-y-auto px-7 pt-20 pb-2"
+          className="flex flex-1 flex-col justify-center gap-0.5 overflow-y-auto px-7 pt-28 pb-2"
         >
           {ALL_LINKS.map((link, i) => {
             const active = pathname === link.href;
