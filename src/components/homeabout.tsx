@@ -11,10 +11,12 @@ export default function HomeAbout({
   names,
   paragraph1,
   paragraph2,
+  image,
 }: {
   names: string;
   paragraph1: string;
   paragraph2: string;
+  image: string;
 }) {
   const [nameA, nameB] = names.split(/ & /);
   return (
@@ -22,7 +24,7 @@ export default function HomeAbout({
       <div className="mx-auto grid max-w-[1360px] items-center gap-12 md:grid-cols-12">
         <figure className="photo relative aspect-[4/5] md:col-span-5">
           <Image
-            src="/ABOUT.png"
+            src={image}
             alt="Harish Pipari and Dhanyasri Pipari — documentary wedding photographers in Nizamabad"
             fill
             sizes="(min-width: 768px) 40vw, 100vw"

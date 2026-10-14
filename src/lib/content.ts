@@ -205,6 +205,7 @@ export type HomeVM = {
   aboutNames: string;
   aboutP1: string;
   aboutP2: string;
+  aboutImage: string;
   tiles: HomeTileVM[];
 };
 
@@ -227,6 +228,7 @@ const loadHome = async (): Promise<HomeVM> => {
     aboutNames: settings.about_names ?? "",
     aboutP1: settings.about_p1 ?? "",
     aboutP2: settings.about_p2 ?? "",
+    aboutImage: mediaUrl(settings.about_image ?? "/ABOUT.png"),
     tiles: tiles.map((t) => ({
       href: t.href,
       label: t.label,

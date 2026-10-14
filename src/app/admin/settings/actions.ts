@@ -4,6 +4,7 @@ import { inArray, sql } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { TAGS } from "@/lib/content";
 import { publish, requireAdmin } from "@/lib/admin";
+import type { UploadedMeta } from "@/lib/upload";
 
 // Keys the dashboard may write. Anything else in the table is read-only.
 const EDITABLE_SETTINGS = [
@@ -24,6 +25,7 @@ const EDITABLE_SETTINGS = [
   "about_names",
   "about_p1",
   "about_p2",
+  "about_image",
 ] as const;
 
 export async function saveSettings(formData: FormData) {
@@ -56,5 +58,35 @@ export async function saveSettings(formData: FormData) {
       .where(inArray(schema.siteSettings.key, cleared));
   }
 
+  publish(TAGS.settings, TAGS.home);
+}
+
+/** About portrait — stores the R2 key (or gallery src) like hero tiles. */
+export async function setAboutImage(meta: UploadedMeta) {
+  await requireAdmin();
+  if (!meta.key) throw new Error("Missing image key.");
+  const t = new Date().toISOString();
+  await getDb()
+    .insert(schema.siteSettings)
+    .values({ key: "about_image", value: meta.key, updatedAt: t })
+    .onConflictDoUpdate({
+      target: schema.siteSettings.key,
+      set: { value: meta.key, updatedAt: t },
+    });
+  publish(TAGS.settings, TAGS.home);
+}
+
+/** Pick the about portrait from an existing gallery frame. */
+export async function pickAboutImage(src: string) {
+  await requireAdmin();
+  if (!src) throw new Error("Missing image source.");
+  const t = new Date().toISOString();
+  await getDb()
+    .insert(schema.siteSettings)
+    .values({ key: "about_image", value: src, updatedAt: t })
+    .onConflictDoUpdate({
+      target: schema.siteSettings.key,
+      set: { value: src, updatedAt: t },
+    });
   publish(TAGS.settings, TAGS.home);
 }

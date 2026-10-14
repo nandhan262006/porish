@@ -1,7 +1,7 @@
 /** Central SEO config — single source of truth for URLs, NAP + socials. */
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://phorishshoots.in";
+  "https://phorish.com";
 
 export const SITE_NAME = "Phorish Shoots";
 export const SITE_LOCALE = "en_IN";
@@ -15,7 +15,7 @@ export const ADDRESS_LINES = [
   "Nizamabad, Telangana 503003",
 ];
 
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/ABOUT.png`;
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-cover.jpg`;
 export const LOGO_URL = `${SITE_URL}/logo.png`;
 
 export const abs = (path = "/") =>

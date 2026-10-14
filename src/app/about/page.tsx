@@ -5,6 +5,8 @@ import Botanical from "@/components/Botanical";
 import Reveal from "@/components/Reveal";
 
 import { SITE_URL, DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { getSettings } from "@/lib/content";
+import { mediaUrl } from "@/lib/media";
 
 export const metadata: Metadata = {
   title: "About — Wedding Photographers in Nizamabad",
@@ -65,7 +67,9 @@ const TIMELINE = [
   },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const settings = await getSettings();
+  const aboutImage = mediaUrl(settings.about_image ?? "/ABOUT.png");
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
@@ -118,7 +122,7 @@ export default function AboutPage() {
           <Reveal className="md:col-span-5">
             <figure className="photo relative mx-auto aspect-[4/5] max-w-[520px]">
               <Image
-                src="/ABOUT.png"
+                src={aboutImage}
                 alt="Harish Pipari and Dhanyasri Pipari — documentary wedding photographers in Nizamabad, Telangana"
                 fill
                 priority
@@ -193,23 +197,22 @@ export default function AboutPage() {
           <div className="thin-rule mx-auto mt-8 w-16" />
         </Reveal>
 
-        <ol className="mx-auto mt-12 grid max-w-4xl gap-0 md:mt-16">
+        <ol className="mx-auto mt-12 grid max-w-3xl gap-0 md:mt-16">
           {TIMELINE.map((step, i) => (
-            <Reveal key={step.title} delay={Math.min(i, 4) * 60}>
-              <li className="grid gap-3 border-t border-black/10 py-8 md:grid-cols-12 md:gap-8">
-                <p className="eyebrow text-terracotta md:col-span-3 md:pt-1">
-                  {step.year}
+            <li
+              key={step.title}
+              className="border-t border-black/10 py-10 text-center last:border-b"
+            >
+              <Reveal delay={Math.min(i, 4) * 60}>
+                <p className="eyebrow text-terracotta">{step.year}</p>
+                <h3 className="serif-display mx-auto mt-3 max-w-xl text-2xl leading-snug md:text-3xl">
+                  {step.title}
+                </h3>
+                <p className="mx-auto mt-3 max-w-2xl text-[0.9375rem] leading-7 text-muted">
+                  {step.copy}
                 </p>
-                <div className="md:col-span-9">
-                  <h3 className="serif-display text-2xl leading-snug md:text-3xl">
-                    {step.title}
-                  </h3>
-                  <p className="mt-3 max-w-2xl text-[0.9375rem] leading-7 text-muted">
-                    {step.copy}
-                  </p>
-                </div>
-              </li>
-            </Reveal>
+              </Reveal>
+            </li>
           ))}
         </ol>
       </section>

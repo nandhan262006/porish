@@ -6,7 +6,7 @@ import Reveal from "@/components/Reveal";
 import ImageStreamHero from "@/components/ImageStreamHero";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { getGalleries, getGalleryBySlug } from "@/lib/content";
-import { SITE_URL, INSTAGRAM } from "@/lib/seo";
+import { SITE_URL, INSTAGRAM, DEFAULT_OG_IMAGE, abs } from "@/lib/seo";
 
 export async function generateStaticParams() {
   const galleries = await getGalleries();
@@ -24,7 +24,7 @@ export async function generateMetadata({
   const title = g.seoTitle ? `${g.title} ${g.seoTitle.split(" in ")[0]} — Phorish Shoots` : `${g.title} — Phorish Shoots`;
   const description = g.seoDescription || g.blurb;
   const cover = g.images[0];
-  const ogImage = cover ? cover.file : `${SITE_URL}/ABOUT.png`;
+  const ogImage = cover ? abs(cover.file) : DEFAULT_OG_IMAGE;
   return {
     title,
     description,

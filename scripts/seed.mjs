@@ -121,6 +121,7 @@ const SETTINGS = {
     "What began in 2018 with a single Canon 200D bought for ₹20,000 is now Phorish Shoots — a Nizamabad studio run by siblings Harish & Dhanyasri. Since 2020 we've covered 100+ weddings across India, from intimate birthdays to a five-star wedding at AVASA, Hyderabad.",
   about_p2:
     "Harish films, Dhanyasri photographs — but we both chase the same thing. The best photographs don't just show how a moment looked. They remind you how it felt.",
+  about_image: "/ABOUT.png",
 };
 
 // Fanned hero trio — card classes / GSAP hooks stay code-driven by index.
