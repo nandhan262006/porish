@@ -50,7 +50,9 @@ p {
   text-wrap: pretty;
 }
 
-main p,
+/* Eyebrows are 12px micro-labels, not prose — capping their measure
+   breaks centering in text-center heroes (the capped box sticks left). */
+main p:not(.eyebrow),
 footer p,
 address {
   max-width: 68ch;
