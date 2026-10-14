@@ -19,10 +19,10 @@ export const metadata: Metadata = {
     "documentary wedding photographer India",
     "Phorish Shoots story",
   ],
-  alternates: { canonical: "/about" },
+  alternates: { canonical: "/about-us" },
   openGraph: {
     type: "profile",
-    url: `${SITE_URL}/about`,
+    url: `${SITE_URL}/about-us`,
     title: "About Phorish Shoots — Wedding Photographers in Nizamabad",
     description:
       "Two engineers turned storytellers. 100+ weddings across India since 2020 — candid, documentary & cinematic.",
@@ -76,7 +76,7 @@ export default async function AboutPage() {
     mainEntity: {
       "@type": "Photographer",
       name: "Phorish Shoots — Harish Pipari & Dhanyasri Pipari",
-      url: `${SITE_URL}/about`,
+      url: `${SITE_URL}/about-us`,
       image: DEFAULT_OG_IMAGE,
       address: {
         "@type": "PostalAddress",
@@ -313,7 +313,7 @@ export default async function AboutPage() {
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-6">
             <Link
-              href="/contact"
+              href="/contact-us"
               className="inline-flex h-12 items-center bg-foreground px-7 text-[11px] tracking-[0.22em] uppercase text-background transition-colors hover:bg-terracotta"
             >
               Let us tell your story

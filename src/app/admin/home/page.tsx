@@ -93,7 +93,7 @@ export default async function AdminHomePage() {
                 <AdminForm action={saveTile} className="mt-3 grid gap-4 md:grid-cols-2">
                   <input type="hidden" name="id" value={tile.id} />
                   <Field name="label" label="Label" defaultValue={tile.label} />
-                  <Field name="href" label="Links to" defaultValue={tile.href} hint="e.g. /weddings" />
+                  <Field name="href" label="Links to" defaultValue={tile.href} hint="e.g. /wedding" />
                   <Field name="alt" label="Alt text" defaultValue={tile.alt} />
                   <Field name="position" label="Crop focus" defaultValue={tile.position} hint="CSS object-position class, e.g. object-[center_30%]" />
                   <div className="md:col-span-2">

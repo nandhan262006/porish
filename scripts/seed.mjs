@@ -42,7 +42,7 @@ function imageSize(file) {
 }
 
 const GALLERIES = [
-  { slug: "weddings", title: "Weddings", category: "weddings", blurb: "Rituals, tears and laughter from the big day — held exactly as they happened.",
+  { slug: "wedding", title: "Weddings", category: "weddings", blurb: "Rituals, tears and laughter from the big day — held exactly as they happened.",
     seoTitle: "Wedding Photography in Nizamabad & Telangana",
     seoDescription: "Documentary wedding photography in Nizamabad, Hyderabad & Telangana — rituals, tears and laughter held exactly as they happened. 100+ weddings since 2020. View 26 frames & book your date.",
     seoCopy: "Documentary wedding coverage across Nizamabad, Hyderabad, Karimnagar and Warangal — full-day rituals, candid family moments and editorial portraits, delivered in a private gallery." },
@@ -54,7 +54,7 @@ const GALLERIES = [
     seoTitle: "Toddler & Kids Photography in Hyderabad",
     seoDescription: "Unfiltered toddler photography in Hyderabad & Nizamabad — first steps, favourite toys and unstaged joy. View 27 frames & book a session.",
     seoCopy: "Childhood exactly as it is — fast, funny and unfiltered. Outdoor and at-home toddler sessions across Hyderabad and Nizamabad." },
-  { slug: "new-born", title: "New Born", category: "newborn", blurb: "The earliest days, gently documented — tiny hands, sleepy stretches, new beginnings.",
+  { slug: "newborn", title: "New Born", category: "newborn", blurb: "The earliest days, gently documented — tiny hands, sleepy stretches, new beginnings.",
     seoTitle: "Newborn Photography in Nizamabad",
     seoDescription: "Gentle, unposed newborn photography in Nizamabad & Hyderabad — tiny hands, sleepy stretches, new beginnings. View 28 frames & book a session.",
     seoCopy: "Slow, patient newborn sessions at home or in studio — safe, warm and unposed, with parents and siblings woven in gently." },
@@ -85,9 +85,9 @@ const FAQS = [
 ];
 
 const SERVICES = [
-  ["weddings", "Weddings", "The day, held as it happened.", 26, "Documentary", "/phorish-extract/wedding/03_691eb2_126314bb98ff4e67b667d3ac43c65122_mv2.jpg"],
+  ["wedding", "Weddings", "The day, held as it happened.", 26, "Documentary", "/phorish-extract/wedding/03_691eb2_126314bb98ff4e67b667d3ac43c65122_mv2.jpg"],
   ["pre-wedding", "Pre-Wedding", "Quiet hours before the vows.", 26, "Candid & editorial", "/phorish-extract/pre-wedding/03_691eb2_de9f6ea47ae0416dbe35866aca7b5e7d_mv2.jpg"],
-  ["new-born", "New Born", "The earliest days, gently.", 28, "Gentle & unposed", "/phorish-extract/newborn/03_691eb2_a5bebcde9cca48baab0e77dab5987d5e_mv2.jpg"],
+  ["newborn", "New Born", "The earliest days, gently.", 28, "Gentle & unposed", "/phorish-extract/newborn/03_691eb2_a5bebcde9cca48baab0e77dab5987d5e_mv2.jpg"],
   ["toddlers", "Toddlers", "Childhood, unfiltered.", 27, "Unfiltered", "/phorish-extract/babybump-toddlers/03_691eb2_5e24279512994a59bfaf07d4dd78b137_mv2.jpg"],
   ["modeling", "Modeling", "Portraits with intent.", 25, "Editorial", "/phorish-extract/modeling/03_691eb2_31fe9dfabaa1453fa174e169a467f210_mv2.jpg"],
 ];
@@ -127,8 +127,8 @@ const SETTINGS = {
 // Fanned hero trio — card classes / GSAP hooks stay code-driven by index.
 const HOME_TILES = [
   ["/pre-wedding", "Pre-Wedding", "/phorish-extract/pre-wedding/01_691eb2_37440b721b684ffda83177d7584d78b6_mv2.jpg", "Pre-wedding portrait photographed by Phorish Shoots", "object-[center_30%]"],
-  ["/weddings", "Weddings", "/phorish-extract/wedding/01_691eb2_e4a1b776ccc84dca9a796d28544e30fc_mv2.jpg", "Wedding ceremony photographed by Phorish Shoots", "object-[center_35%]"],
-  ["/new-born", "New Born", "/phorish-extract/newborn/01_691eb2_99b46f051bc54ddf8a8a5510dcd96356_mv2.jpg", "Newborn photograph by Phorish Shoots", "object-[center_40%]"],
+  ["/wedding", "Weddings", "/phorish-extract/wedding/01_691eb2_e4a1b776ccc84dca9a796d28544e30fc_mv2.jpg", "Wedding ceremony photographed by Phorish Shoots", "object-[center_35%]"],
+  ["/newborn", "New Born", "/phorish-extract/newborn/01_691eb2_99b46f051bc54ddf8a8a5510dcd96356_mv2.jpg", "Newborn photograph by Phorish Shoots", "object-[center_40%]"],
 ];
 
 async function main() {
@@ -146,7 +146,7 @@ async function main() {
   const t = now();
 
   // Homepage tab order is the source of truth, not array position.
-  const GALLERY_SORT = { weddings: 0, "pre-wedding": 1, "new-born": 2, toddlers: 3, modeling: 4 };
+  const GALLERY_SORT = { wedding: 0, "pre-wedding": 1, newborn: 2, toddlers: 3, modeling: 4 };
 
   for (const [i, g] of GALLERIES.entries()) {
     await db.execute({
@@ -157,7 +157,7 @@ async function main() {
 
   // Images from data/categories.json (skip files missing on disk)
   const raw = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "categories.json"), "utf8"));
-  const catToSlug = { weddings: "weddings", "pre-wedding": "pre-wedding", newborn: "new-born", "babybump-toddlers": "toddlers", modeling: "modeling" };
+  const catToSlug = { weddings: "wedding", "pre-wedding": "pre-wedding", newborn: "newborn", "babybump-toddlers": "toddlers", modeling: "modeling" };
   let imageCount = 0;
   for (const [cat, files] of Object.entries(raw)) {
     const slug = catToSlug[cat];

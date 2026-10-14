@@ -27,6 +27,14 @@ const nextConfig: NextConfig = {
     qualities: [75, 90],
     remotePatterns,
   },
+  async redirects() {
+    return [
+      { source: "/about", destination: "/about-us", permanent: true },
+      { source: "/contact", destination: "/contact-us", permanent: true },
+      { source: "/weddings", destination: "/wedding", permanent: true },
+      { source: "/new-born", destination: "/newborn", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

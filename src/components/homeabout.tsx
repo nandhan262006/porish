@@ -63,7 +63,7 @@ export default function HomeAbout({
             ))}
           </dl>
 
-          <Link href="/about" aria-label="Read the full story of Phorish Shoots studio" className="nav-link mt-8 inline-block">
+          <Link href="/about-us" aria-label="Read the full story of Phorish Shoots studio" className="nav-link mt-8 inline-block">
             Read the full story
           </Link>
         </div>

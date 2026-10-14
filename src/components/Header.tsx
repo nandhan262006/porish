@@ -8,16 +8,16 @@ import { useEffect, useState } from "react";
 const INSTAGRAM = "https://www.instagram.com/phorish_shoots/";
 
 const LEFT_LINKS = [
-  { href: "/weddings", label: "Weddings" },
+  { href: "/wedding", label: "Weddings" },
   { href: "/pre-wedding", label: "Pre-Wedding" },
-  { href: "/new-born", label: "New Born" },
+  { href: "/newborn", label: "New Born" },
 ];
 
 const RIGHT_LINKS = [
   { href: "/toddlers", label: "Toddlers" },
   { href: "/modeling", label: "Modeling" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/about-us", label: "About" },
+  { href: "/contact-us", label: "Contact" },
 ];
 
 const ALL_LINKS = [

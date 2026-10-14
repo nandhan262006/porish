@@ -13,10 +13,10 @@ export const metadata: Metadata = {
     "Phorish Shoots contact",
     "wedding photography packages Telangana",
   ],
-  alternates: { canonical: "/contact" },
+  alternates: { canonical: "/contact-us" },
   openGraph: {
     type: "website",
-    url: `${SITE_URL}/contact`,
+    url: `${SITE_URL}/contact-us`,
     title: "Contact Phorish Shoots — Book Your Date in Nizamabad",
     description:
       "4.9 stars from 85 Google reviews. Call +91 85003 62643 or book on WhatsApp — wedding dates fill fast.",
@@ -29,7 +29,7 @@ const MAPS_URL = "https://maps.app.goo.gl/BLWq2ZWdHid7ptkXA";
 const SCHEMA = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "@id": `${SITE_URL}/contact#studio`,
+  "@id": `${SITE_URL}/contact-us#studio`,
   name: "Phorish Shoots",
   image: DEFAULT_OG_IMAGE,
   description:

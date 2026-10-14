@@ -26,7 +26,7 @@ export default function GalleryCTA() {
               Write to us
               <span aria-hidden>↗</span>
             </a>
-            <Link href="/contact" aria-label="Contact Phorish Shoots and get directions" className="nav-link">
+            <Link href="/contact-us" aria-label="Contact Phorish Shoots and get directions" className="nav-link">
               Contact & directions
             </Link>
           </div>

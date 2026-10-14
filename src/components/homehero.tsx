@@ -217,7 +217,7 @@ export default function HomeHero({ home }: { home: HomeVM }) {
             See the work
           </a>
           <Link
-            href="/about"
+            href="/about-us"
             aria-label="About Phorish Shoots wedding photography studio"
             className="inline-flex h-12 items-center bg-foreground px-7 text-[11px] tracking-[0.22em] uppercase text-background transition-colors hover:bg-terracotta"
           >

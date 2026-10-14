@@ -135,7 +135,7 @@ export default async function GalleryPage({
         <p className="mx-auto mb-8 max-w-2xl text-center text-[0.9375rem] leading-7 text-muted">
           {g.blurb} Based in Nizamabad, shooting across Hyderabad, Telangana
           and India —{" "}
-          <Link href="/contact" className="underline underline-offset-4">
+          <Link href="/contact-us" className="underline underline-offset-4">
             book this story
           </Link>
           .
@@ -202,7 +202,7 @@ export default async function GalleryPage({
           </nav>
           <p className="mx-auto mt-8 max-w-xl text-sm leading-7 text-muted">
             Love this style?{" "}
-            <Link href="/contact" className="underline underline-offset-4">
+            <Link href="/contact-us" className="underline underline-offset-4">
               Check your date
             </Link>{" "}
             — wedding season fills months ahead across Telangana.

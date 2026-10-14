@@ -41,7 +41,7 @@ export default async function Faq({
             <p className="mt-4 max-w-sm text-[0.9375rem] leading-7 text-muted">
               Everything couples and families usually ask before booking. Still
               unsure?{" "}
-              <a href={`${SITE_URL}/contact`} className="underline underline-offset-4">
+              <a href={`${SITE_URL}/contact-us`} className="underline underline-offset-4">
                 Contact the studio
               </a>{" "}
               — we reply fast.

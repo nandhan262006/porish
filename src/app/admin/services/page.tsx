@@ -112,7 +112,7 @@ export default async function AdminServicesPage() {
       <section className="mt-10 rounded-3xl bg-[#1a1410] p-6 text-[#f6f1ea] md:p-8">
         <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-[#f3c7b6]">Add new service</p>
         <p className="mt-2 max-w-xl text-sm leading-6 text-white/60">
-          Name it exactly like its gallery so the card links to a live page (e.g. “Weddings” → /weddings). Add its cover afterwards in the card above.
+          Name it exactly like its gallery so the card links to a live page (e.g. “Weddings” → /wedding). Add its cover afterwards in the card above.
         </p>
         <AdminForm action={saveService} refresh className="mt-4 grid gap-4 md:grid-cols-12">
           <div className="md:col-span-5">

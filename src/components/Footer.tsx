@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 const WORK = [
-  { href: "/weddings", label: "Weddings" },
+  { href: "/wedding", label: "Weddings" },
   { href: "/pre-wedding", label: "Pre-Wedding" },
-  { href: "/new-born", label: "New Born" },
+  { href: "/newborn", label: "New Born" },
   { href: "/toddlers", label: "Toddlers" },
   { href: "/modeling", label: "Modeling" },
 ];
@@ -67,7 +67,7 @@ export default function Footer() {
               Instagram ↗
             </a>
             <span className="mt-1 flex gap-5 text-[12px] tracking-[0.18em] uppercase">
-              <Link href="/contact" className="text-white hover:text-white">
+              <Link href="/contact-us" className="text-white hover:text-white">
                 Contact
               </Link>
               <a
