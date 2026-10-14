@@ -21,7 +21,8 @@ export async function generateMetadata({
   const { gallery } = await params;
   const g = await getGalleryBySlug(gallery);
   if (!g) return {};
-  const title = g.seoTitle ? `${g.title} ${g.seoTitle.split(" in ")[0]} — Phorish Shoots` : `${g.title} — Phorish Shoots`;
+  // Layout title template already appends "| Phorish Shoots" — no brand suffix here.
+  const title = g.seoTitle ? `${g.title} ${g.seoTitle.split(" in ")[0]}` : g.title;
   const description = g.seoDescription || g.blurb;
   const cover = g.images[0];
   const ogImage = cover ? abs(cover.file) : DEFAULT_OG_IMAGE;
