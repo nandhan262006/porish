@@ -15,6 +15,7 @@ import {
   EMAIL,
   DEFAULT_OG_IMAGE,
 } from "@/lib/seo";
+import { MEDIA_ORIGIN } from "@/lib/media";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -166,6 +167,11 @@ export default function RootLayout({
       <body
         className={`${cormorant.variable} ${inter.variable} bg-background text-foreground antialiased`}
       >
+        {/* Warm the R2 connection before the hero corridor / gallery asks
+            for its first frame. React 19 hoists this into <head>. */}
+        {MEDIA_ORIGIN ? (
+          <link rel="preconnect" href={MEDIA_ORIGIN} crossOrigin="anonymous" />
+        ) : null}
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-[#1a1410] focus:px-4 focus:py-2 focus:text-sm focus:text-[#f6f1ea]"

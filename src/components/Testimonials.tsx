@@ -1,7 +1,5 @@
-"use client";
-
 import React from "react";
-import { motion, MotionConfig } from "motion/react";
+import Reveal from "@/components/Reveal";
 
 type Testimonial = {
   text: string;
@@ -59,16 +57,14 @@ function TestimonialsColumn({
   reverse?: boolean;
 }) {
   return (
-    <div className={className} aria-hidden={undefined}>
-      <motion.div
-        animate={reverse ? { translateY: ["-50%", "0%"] } : { translateY: "-50%" }}
-        transition={{
-          duration,
-          repeat: Infinity,
-          ease: "linear",
-          repeatType: "loop",
-        }}
-        className="flex flex-col gap-6 pb-6"
+    <div className={className}>
+      {/* Two copies: a -50% translate loops seamlessly. The duplicate is
+          aria-hidden so screen readers read each quote once. */}
+      <div
+        className={`flex flex-col gap-6 pb-6 ${
+          reverse ? "testimonial-marquee-down" : "testimonial-marquee-up"
+        }`}
+        style={{ animationDuration: `${duration}s` }}
       >
         {[0, 1].map((copy) => (
           <React.Fragment key={copy}>
@@ -79,7 +75,7 @@ function TestimonialsColumn({
             ))}
           </React.Fragment>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }
@@ -92,13 +88,7 @@ export default function Testimonials({ items }: { items: Testimonial[] }) {
   return (
     <section aria-labelledby="testimonials-heading" className="relative my-20 overflow-hidden">
       <div className="mx-auto max-w-[1360px] px-5 md:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="mx-auto flex max-w-[540px] flex-col items-center justify-center text-center"
-        >
+        <Reveal className="mx-auto flex max-w-[540px] flex-col items-center justify-center text-center">
           <p className="eyebrow">Client love notes · 4.9 ★ from 85 Google reviews</p>
           <h2 id="testimonials-heading" className="serif-display mt-4 text-5xl md:text-6xl">
             Words from our couples
@@ -107,24 +97,22 @@ export default function Testimonials({ items }: { items: Testimonial[] }) {
             Real weddings, newborn sessions and family celebrations across
             Nizamabad, Hyderabad and Telangana — and the frames they took home.
           </p>
-        </motion.div>
+        </Reveal>
 
-        <MotionConfig reducedMotion="user">
-          <div className="mt-12 flex max-h-[740px] justify-center gap-6 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)]">
-            <TestimonialsColumn testimonials={firstColumn} duration={26} />
-            <TestimonialsColumn
-              testimonials={secondColumn}
-              className="hidden md:block"
-              duration={32}
-              reverse
-            />
-            <TestimonialsColumn
-              testimonials={thirdColumn}
-              className="hidden lg:block"
-              duration={29}
-            />
-          </div>
-        </MotionConfig>
+        <div className="mt-12 flex max-h-[740px] justify-center gap-6 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)]">
+          <TestimonialsColumn testimonials={firstColumn} duration={26} />
+          <TestimonialsColumn
+            testimonials={secondColumn}
+            className="hidden md:block"
+            duration={32}
+            reverse
+          />
+          <TestimonialsColumn
+            testimonials={thirdColumn}
+            className="hidden lg:block"
+            duration={29}
+          />
+        </div>
       </div>
     </section>
   );

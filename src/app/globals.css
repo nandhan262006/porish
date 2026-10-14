@@ -212,6 +212,34 @@ button {
   animation: caption-fade 450ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Testimonial wall: each column is two copies of the list, so a plain
+   -50% translate loops seamlessly. The reverse column just plays the
+   same keyframes backwards. Duration comes from inline animationDuration.
+   Zero JS — replaces the motion/react marquee. */
+@keyframes testimonial-marquee {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+.testimonial-marquee-up {
+  animation: testimonial-marquee 26s linear infinite;
+}
+
+.testimonial-marquee-down {
+  animation: testimonial-marquee 32s linear infinite reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-marquee-up,
+  .testimonial-marquee-down {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .caption-fade {
     animation: none;

@@ -6,6 +6,10 @@ const BASE = (
   ""
 ).replace(/\/+$/, "");
 
+/** Origin of the R2 public bucket, for `<link rel="preconnect">`. Empty
+ *  when the site serves from /public, in which case no preconnect is needed. */
+export const MEDIA_ORIGIN = BASE;
+
 export function mediaUrl(path: string): string {
   const p = path.startsWith("/") ? path : `/${path}`;
   return BASE ? `${BASE}${p}` : p;

@@ -24,7 +24,14 @@ if (host && !host.endsWith(".r2.dev")) {
 
 const nextConfig: NextConfig = {
   images: {
+    // AVIF first (best for photography), WebP fallback. The optimizer
+    // serves whichever the browser accepts, so this is a pure win on
+    // gallery pages that ship 100+ frames.
+    formats: ["image/avif", "image/webp"],
     qualities: [75, 90],
+    // Optimized derivatives are content-addressed, so they never change:
+    // cache hard and stop re-validating on every request.
+    minimumCacheTTL: 60 * 60 * 24 * 365,
     remotePatterns,
   },
   async redirects() {
