@@ -104,6 +104,7 @@ const SETTINGS = {
   phone_tel: "+918500362643",
   email: "phorishshoots@gmail.com",
   instagram: "https://www.instagram.com/phorish_shoots/",
+  youtube: "https://www.youtube.com/@phorishshoots",
   maps_url: "https://maps.app.goo.gl/BLWq2ZWdHid7ptkXA",
   address: "No. 04, Laxmi Priya Nagar, Janapriya Nagar Road, Mubaraknagar, Nizamabad, Telangana 503003",
   hours: "Open daily · Closes 8:30 PM",

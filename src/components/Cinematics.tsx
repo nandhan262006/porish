@@ -49,15 +49,26 @@ export default async function Cinematics() {
         <p className="text-[12px] font-medium tracking-[0.18em] uppercase text-muted">
           4 wedding films — Nizamabad · Hyderabad · Telangana
         </p>
-        <a
-          href="https://www.instagram.com/phorish_shoots/"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Watch more wedding films by Phorish Shoots on Instagram"
-          className="nav-link"
-        >
-          More films on Instagram
-        </a>
+        <span className="flex items-center gap-6">
+          <a
+            href="https://www.youtube.com/@phorishshoots"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Watch more wedding films by Phorish Shoots on YouTube"
+            className="nav-link"
+          >
+            More films on YouTube
+          </a>
+          <a
+            href="https://www.instagram.com/phorish_shoots/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Watch more wedding films by Phorish Shoots on Instagram"
+            className="nav-link"
+          >
+            Instagram
+          </a>
+        </span>
       </div>
     </section>
   );

@@ -12,6 +12,7 @@ const EDITABLE_SETTINGS = [
   "phone_tel",
   "email",
   "instagram",
+  "youtube",
   "maps_url",
   "address",
   "hours",

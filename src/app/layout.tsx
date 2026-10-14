@@ -9,6 +9,7 @@ import {
   SITE_LOCALE,
   CORE_KEYWORDS,
   INSTAGRAM,
+  YOUTUBE,
   MAPS_URL,
   PHONE_TEL,
   EMAIL,
@@ -125,7 +126,7 @@ const STUDIO_SCHEMA = {
     opens: "00:00",
     closes: "20:30",
   },
-  sameAs: [INSTAGRAM, MAPS_URL],
+  sameAs: [INSTAGRAM, YOUTUBE, MAPS_URL],
   founder: [
     { "@type": "Person", name: "Harish Pipari" },
     { "@type": "Person", name: "Dhanyasri Pipari" },

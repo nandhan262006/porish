@@ -173,7 +173,7 @@ Add panel: Question ("What do couples ask most?") + Answer → Add.
 
 Title `Site settings`. Sub: "Phone, address, homepage headline, and the about text. One save updates all of them on the live site."
 One `AdminForm(saveSettings)` wrapping 3 fieldsets (`space-y-10`), each `bg-cream` card: terracotta group title + helper + `grid gap-5 md:grid-cols-2` fields:
-- Contact & studio: phone_display (tel) · phone_tel (tel) · email · instagram (url) · maps_url (url) · address (textarea 2) · hours · rating_value (number) · review_count (number).
+- Contact & studio: phone_display (tel) · phone_tel (tel) · email · instagram (url) · youtube (url) · maps_url (url) · address (textarea 2) · hours · rating_value (number) · review_count (number).
 - Homepage hero: hero_eyebrow · hero_h1_a · hero_h1_b (italic line 2) · hero_sub (textarea 3) · hero_proof (hint).
 - About teaser: about_names ("Use " & " … italic ampersand") · about_p1 (4) · about_p2 (4).
 Footer: `Save & publish` + "One click saves all groups."

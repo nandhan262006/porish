@@ -14,6 +14,7 @@ export default async function ContactSection() {
   const phoneTel = s.phone_tel ?? "+918500362643";
   const email = s.email ?? "phorishshoots@gmail.com";
   const instagram = s.instagram ?? "https://www.instagram.com/phorish_shoots/";
+  const youtube = s.youtube ?? "https://www.youtube.com/@phorishshoots";
   const handle = instagram.replace(/\/$/, "").split("/").pop() ?? "phorish_shoots";
   const hours = s.hours ?? "Open daily · Closes 8:30 PM";
   return (
@@ -69,6 +70,7 @@ export default async function ContactSection() {
                 ["Phone", phoneLocal],
                 ["Email", email],
                 ["Instagram", `@${handle}`],
+                ["YouTube", "@phorishshoots"],
               ].map(([term, value]) => (
                 <div
                   key={term}
@@ -106,6 +108,20 @@ export default async function ContactSection() {
             >
               <span className="border-b border-foreground/30 pb-1 transition-colors group-hover:border-foreground">
                 Message us on Instagram
+              </span>
+              <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
+                ↗
+              </span>
+            </a>
+            <a
+              href={youtube}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Watch wedding films by Phorish Shoots on YouTube"
+              className="group inline-flex items-center gap-2 text-[0.6875rem] tracking-[0.22em] uppercase"
+            >
+              <span className="border-b border-foreground/30 pb-1 transition-colors group-hover:border-foreground">
+                Watch films on YouTube
               </span>
               <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
                 ↗

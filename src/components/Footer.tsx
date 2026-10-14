@@ -57,15 +57,26 @@ export default function Footer() {
             <a href="tel:+918500362643" className="block hover:text-white">
               +91 85003 62643
             </a>
-            <a
-              href="https://www.instagram.com/phorish_shoots/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Phorish Shoots on Instagram"
-              className="mt-3 inline-block tracking-[0.18em] uppercase text-[12px] text-white"
-            >
-              Instagram ↗
-            </a>
+            <span className="mt-3 flex gap-5 tracking-[0.18em] uppercase text-[12px] text-white">
+              <a
+                href="https://www.instagram.com/phorish_shoots/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Phorish Shoots on Instagram"
+                className="hover:text-white"
+              >
+                Instagram ↗
+              </a>
+              <a
+                href="https://www.youtube.com/@phorishshoots"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Phorish Shoots on YouTube"
+                className="hover:text-white"
+              >
+                YouTube ↗
+              </a>
+            </span>
             <span className="mt-1 flex gap-5 text-[12px] tracking-[0.18em] uppercase">
               <Link href="/contact-us" className="text-white hover:text-white">
                 Contact

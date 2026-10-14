@@ -9,6 +9,7 @@ export const PHONE_DISPLAY = "+91 85003 62643";
 export const PHONE_TEL = "+918500362643";
 export const EMAIL = "phorishshoots@gmail.com";
 export const INSTAGRAM = "https://www.instagram.com/phorish_shoots/";
+export const YOUTUBE = "https://www.youtube.com/@phorishshoots";
 export const MAPS_URL = "https://maps.app.goo.gl/BLWq2ZWdHid7ptkXA";
 export const ADDRESS_LINES = [
   "No. 04, Laxmi Priya Nagar, Janapriya Nagar Road, Mubaraknagar",

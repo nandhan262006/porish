@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const INSTAGRAM = "https://www.instagram.com/phorish_shoots/";
+const YOUTUBE = "https://www.youtube.com/@phorishshoots";
 const WHATSAPP =
   "https://wa.me/918500362643?text=Hi%20Phorish%20Shoots!%20I%20want%20to%20enquire%20about%20a%20shoot.";
 
@@ -192,15 +193,26 @@ export default function Header() {
             Book your date
           </a>
           <div className="mt-5 flex items-center justify-between text-[11px] tracking-[0.22em] uppercase">
-            <a
-              href={INSTAGRAM}
-              target="_blank"
-              rel="noreferrer"
-              onClick={() => setOpen(false)}
-              className="text-white/70 transition-colors hover:text-white"
-            >
-              Instagram ↗
-            </a>
+            <span className="flex items-center gap-5">
+              <a
+                href={INSTAGRAM}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setOpen(false)}
+                className="text-white/70 transition-colors hover:text-white"
+              >
+                Instagram ↗
+              </a>
+              <a
+                href={YOUTUBE}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setOpen(false)}
+                className="text-white/70 transition-colors hover:text-white"
+              >
+                YouTube ↗
+              </a>
+            </span>
             <a href="tel:+918500362643" className="text-white/70 transition-colors hover:text-white">
               +91 85003 62643
             </a>

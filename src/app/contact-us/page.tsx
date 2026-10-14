@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import ContactSection from "@/components/ContactSection";
 
-import { SITE_URL, DEFAULT_OG_IMAGE, INSTAGRAM } from "@/lib/seo";
+import { SITE_URL, DEFAULT_OG_IMAGE, INSTAGRAM, YOUTUBE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Contact — Book Wedding Photography in Nizamabad",
@@ -47,7 +47,7 @@ const SCHEMA = {
   telephone: "+91-8500362643",
   email: "phorishshoots@gmail.com",
   url: SITE_URL,
-  sameAs: [INSTAGRAM, MAPS_URL],
+  sameAs: [INSTAGRAM, YOUTUBE, MAPS_URL],
   hasMap: MAPS_URL,
   priceRange: "₹₹",
   openingHoursSpecification: {

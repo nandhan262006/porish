@@ -26,6 +26,7 @@ const GROUPS: {
       { key: "phone_tel", label: "Phone (tel: link)", type: "tel" },
       { key: "email", label: "Email", type: "email" },
       { key: "instagram", label: "Instagram URL", type: "url" },
+      { key: "youtube", label: "YouTube URL", type: "url" },
       { key: "maps_url", label: "Google Maps link", type: "url" },
       { key: "address", label: "Studio address", textarea: true, rows: 2 },
       { key: "hours", label: "Opening hours" },
