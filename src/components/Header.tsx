@@ -84,10 +84,10 @@ export default function Header() {
             <Image
               src="/logo.png"
               alt="Phorish Shoots — wedding photographer in Nizamabad"
-              width={120}
-              height={40}
+              width={180}
+              height={60}
               priority
-              className={`h-10 w-auto transition-[filter] duration-500 ${open ? "brightness-0 invert" : ""}`}
+              className={`h-14 w-auto transition-[filter] duration-500 ${open ? "brightness-0 invert" : ""}`}
             />
           </Link>
 
