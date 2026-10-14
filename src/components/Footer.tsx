@@ -17,39 +17,40 @@ export default function Footer() {
           <Link href="/" aria-label="Phorish Shoots — home">
             <Image
               src="/logo.png"
-              alt="Phorish Shoots"
+              alt="Phorish Shoots — wedding photographer in Nizamabad"
               width={2172}
               height={724}
               className="h-10 w-auto brightness-0 invert"
             />
           </Link>
-          <p className="mt-4 max-w-sm text-sm leading-7 text-white/60">
-            Documentary wedding photography from Nizamabad. Real moments,
-            held for the people who were there.
+          <p className="mt-4 max-w-sm text-[0.9375rem] leading-7 text-white/80">
+            Documentary wedding photographer in Nizamabad, Telangana. Real
+            moments, held for the people who were there — weddings,
+            pre-wedding, newborn & family stories across India.
           </p>
         </div>
 
-        <div className="md:col-span-3">
-          <p className="eyebrow text-[#d7a08c]">Work</p>
-          <div className="mt-5 flex flex-col gap-3 text-sm text-white/75">
+        <nav aria-label="Footer — galleries" className="md:col-span-3">
+          <h2 className="eyebrow text-[#d7a08c]">Work</h2>
+          <div className="mt-5 flex flex-col gap-3 text-[0.9375rem] text-white/85">
             {WORK.map((item) => (
-              <Link key={item.href} href={item.href} className="hover:text-white">
-                {item.label}
+              <Link key={item.href} href={item.href} className="w-fit transition-colors hover:text-white">
+                {item.label} photography
               </Link>
             ))}
           </div>
-        </div>
+        </nav>
 
         <div className="md:col-span-4">
-          <p className="eyebrow text-[#d7a08c]">Studio</p>
-          <div className="mt-5 space-y-2 text-sm leading-7 text-white/75">
+          <h2 className="eyebrow text-[#d7a08c]">Studio</h2>
+          <address className="mt-5 space-y-2 text-[0.9375rem] leading-7 text-white/85 not-italic">
             <p>
               Laxmi Priya Nagar, Mubaraknagar,
               <br />
               Nizamabad, Telangana 503003
             </p>
-            <p className="text-white/50">Open daily · Closes 8:30 PM</p>
-            <p className="text-white/60">★ 4.9 · 85 Google reviews</p>
+            <p className="text-white/70">Open daily · Closes 8:30 PM</p>
+            <p className="text-white/80">★ 4.9 · 85 Google reviews</p>
             <a href="mailto:phorishshoots@gmail.com" className="block hover:text-white">
               phorishshoots@gmail.com
             </a>
@@ -60,11 +61,12 @@ export default function Footer() {
               href="https://www.instagram.com/phorish_shoots/"
               target="_blank"
               rel="noreferrer"
-              className="mt-3 inline-block tracking-[0.18em] uppercase text-[11px] text-white"
+              aria-label="Phorish Shoots on Instagram"
+              className="mt-3 inline-block tracking-[0.18em] uppercase text-[12px] text-white"
             >
               Instagram ↗
             </a>
-            <span className="mt-1 flex gap-5 text-[11px] tracking-[0.18em] uppercase">
+            <span className="mt-1 flex gap-5 text-[12px] tracking-[0.18em] uppercase">
               <Link href="/contact" className="text-white hover:text-white">
                 Contact
               </Link>
@@ -72,18 +74,19 @@ export default function Footer() {
                 href="https://maps.app.goo.gl/BLWq2ZWdHid7ptkXA"
                 target="_blank"
                 rel="noreferrer"
-                className="text-white/70 hover:text-white"
+                aria-label="Get directions to Phorish Shoots on Google Maps"
+                className="text-white/80 hover:text-white"
               >
                 Directions ↗
               </a>
             </span>
-          </div>
+          </address>
         </div>
       </div>
 
-      <div className="mx-auto mt-14 flex max-w-[1360px] flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row sm:justify-between">
-        <p>© {new Date().getFullYear()} Phorish Shoots</p>
-        <p>Since 2020 · 100+ weddings</p>
+      <div className="mx-auto mt-14 flex max-w-[1360px] flex-col gap-2 border-t border-white/10 pt-6 text-[13px] text-white/60 sm:flex-row sm:justify-between">
+        <p>© {new Date().getFullYear()} Phorish Shoots — wedding photographer in Nizamabad</p>
+        <p>Since 2020 · 100+ weddings across India</p>
       </div>
     </footer>
   );

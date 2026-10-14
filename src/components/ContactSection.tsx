@@ -1,21 +1,32 @@
 import Botanical from "@/components/Botanical";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
+import { getSettings } from "@/lib/content";
 
-const MAPS_URL = "https://maps.app.goo.gl/BLWq2ZWdHid7ptkXA";
-const ADDRESS =
-  "No. 04, Laxmi Priya Nagar, Janapriya Nagar Road, Mubaraknagar, Nizamabad, Telangana 503003";
-
-export default function ContactSection() {
+export default async function ContactSection() {
+  const s = await getSettings();
+  const MAPS_URL = s.maps_url ?? "";
+  const ADDRESS =
+    s.address ??
+    "No. 04, Laxmi Priya Nagar, Janapriya Nagar Road, Mubaraknagar, Nizamabad, Telangana 503003";
+  const phoneDisplay = s.phone_display ?? "+91 85003 62643";
+  const phoneLocal = phoneDisplay.replace(/^\+91 ?/, "0");
+  const phoneTel = s.phone_tel ?? "+918500362643";
+  const email = s.email ?? "phorishshoots@gmail.com";
+  const instagram = s.instagram ?? "https://www.instagram.com/phorish_shoots/";
+  const handle = instagram.replace(/\/$/, "").split("/").pop() ?? "phorish_shoots";
+  const hours = s.hours ?? "Open daily · Closes 8:30 PM";
   return (
     <>
-      <section id="contact" className="grid scroll-mt-20 gap-12 py-14 md:grid-cols-12 md:py-20">
+      <section id="contact" aria-labelledby="book-heading" className="grid scroll-mt-20 gap-12 py-14 md:grid-cols-12 md:py-20">
         <div className="md:col-span-5">
           <Reveal>
-            <h2 className="serif-display text-3xl md:text-4xl">Book a date</h2>
-            <p className="mt-3 max-w-md text-[0.9375rem] leading-7 text-muted">
-              Tell us about your celebration — it lands straight on our
-              WhatsApp and we reply with availability and packages.
+            <p className="eyebrow">Bookings — Nizamabad · Hyderabad · India</p>
+            <h2 id="book-heading" className="serif-display mt-3 text-3xl md:text-4xl">Book your wedding date</h2>
+            <p className="mt-3 max-w-md text-[1rem] leading-8 text-muted">
+              Tell us about your wedding, pre-wedding, newborn or family
+              celebration — it lands straight on our WhatsApp and we reply
+              with availability and packages.
             </p>
             <div className="mt-8">
               <ContactForm />
@@ -25,15 +36,19 @@ export default function ContactSection() {
 
         <div className="md:col-span-6 md:col-start-7">
           <Reveal delay={120}>
-            <h2 className="serif-display text-3xl md:text-4xl">Find us</h2>
-            <address className="mt-4 max-w-md text-[0.9375rem] leading-7 text-muted not-italic">
-              {ADDRESS}
+            <h3 className="serif-display text-3xl md:text-4xl">Visit the studio</h3>
+            <address className="mt-4 max-w-md text-[1rem] leading-8 text-muted not-italic">
+              {ADDRESS} —{" "}
+              <a href={MAPS_URL} target="_blank" rel="noreferrer" className="underline underline-offset-4">
+                open in Google Maps
+              </a>
             </address>
             <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
               <a
                 href={MAPS_URL}
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Get directions to Phorish Shoots studio on Google Maps"
                 className="group inline-flex items-center gap-2 text-[0.6875rem] tracking-[0.22em] uppercase"
               >
                 <span className="border-b border-foreground/30 pb-1 transition-colors group-hover:border-foreground">
@@ -43,17 +58,17 @@ export default function ContactSection() {
                   ↗
                 </span>
               </a>
-              <a href="tel:+918500362643" className="nav-link">
-                085003 62643
+              <a href={`tel:${phoneTel}`} aria-label={`Call Phorish Shoots on ${phoneDisplay}`} className="nav-link">
+                {phoneLocal}
               </a>
             </div>
 
             <dl className="mt-8 grid max-w-md grid-cols-1 gap-0 border-t border-black/10">
               {[
-                ["Hours", "Open daily · Closes 8:30 PM"],
-                ["Phone", "085003 62643"],
-                ["Email", "phorishshoots@gmail.com"],
-                ["Instagram", "@phorish_shoots"],
+                ["Hours", hours],
+                ["Phone", phoneLocal],
+                ["Email", email],
+                ["Instagram", `@${handle}`],
               ].map(([term, value]) => (
                 <div
                   key={term}
@@ -84,7 +99,7 @@ export default function ContactSection() {
           </div>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-6">
             <a
-              href="https://www.instagram.com/phorish_shoots/"
+              href={instagram}
               target="_blank"
               rel="noreferrer"
               className="group inline-flex items-center gap-2 text-[0.6875rem] tracking-[0.22em] uppercase"

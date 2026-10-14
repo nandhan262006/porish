@@ -59,8 +59,8 @@ export default function CinemaPlayer({
         type="button"
         onClick={toggleSound}
         aria-pressed={!muted}
-        aria-label={muted ? `Play ${title} with sound` : `Mute ${title}`}
-        className="absolute top-3 right-3 inline-flex items-center gap-2 bg-black/55 px-3 py-2 text-[10px] tracking-[0.2em] uppercase text-white backdrop-blur-sm transition-colors hover:bg-black/80"
+        aria-label={muted ? `Play ${title} wedding film with sound` : `Mute ${title} wedding film`}
+        className="absolute top-3 right-3 inline-flex items-center gap-2 bg-black/55 px-3 py-2 text-[11px] font-medium tracking-[0.18em] uppercase text-white backdrop-blur-sm transition-colors hover:bg-black/80"
       >
         <span aria-hidden>{muted ? "🔇" : "🔊"}</span>
         {muted ? "Tap for sound" : "Sound on"}

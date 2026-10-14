@@ -35,21 +35,26 @@ export default function ContactForm() {
     "h-12 w-full border border-foreground/20 bg-cream px-4 text-sm text-foreground placeholder:text-muted/70 focus:border-terracotta focus:outline-none";
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-4">
+    <form onSubmit={onSubmit} aria-label="Book Phorish Shoots on WhatsApp" className="flex flex-col gap-4">
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="flex flex-col gap-2 text-[11px] tracking-[0.22em] uppercase text-muted">
+        <label htmlFor="contact-name" className="flex flex-col gap-2 text-[12px] font-medium tracking-[0.18em] uppercase text-muted">
           Your name
           <input
+            id="contact-name"
+            name="name"
             required
+            autoComplete="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Priya & Arjun"
             className={input}
           />
         </label>
-        <label className="flex flex-col gap-2 text-[11px] tracking-[0.22em] uppercase text-muted">
+        <label htmlFor="contact-event" className="flex flex-col gap-2 text-[12px] font-medium tracking-[0.18em] uppercase text-muted">
           Event type
           <select
+            id="contact-event"
+            name="eventType"
             value={eventType}
             onChange={(e) => setEventType(e.target.value)}
             className={input}
@@ -62,18 +67,23 @@ export default function ContactForm() {
           </select>
         </label>
       </div>
-      <label className="flex flex-col gap-2 text-[11px] tracking-[0.22em] uppercase text-muted">
+      <label htmlFor="contact-date" className="flex flex-col gap-2 text-[12px] font-medium tracking-[0.18em] uppercase text-muted">
         Event date
         <input
+          id="contact-date"
+          name="date"
           type="date"
+          autoComplete="off"
           value={date}
           onChange={(e) => setDate(e.target.value)}
           className={input}
         />
       </label>
-      <label className="flex flex-col gap-2 text-[11px] tracking-[0.22em] uppercase text-muted">
+      <label htmlFor="contact-message" className="flex flex-col gap-2 text-[12px] font-medium tracking-[0.18em] uppercase text-muted">
         Anything we should know?
         <textarea
+          id="contact-message"
+          name="message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Venue, city, how many days…"
@@ -87,9 +97,9 @@ export default function ContactForm() {
       >
         Send on WhatsApp
       </button>
-      <p className="text-xs leading-5 text-muted">
+      <p className="text-[13px] leading-6 text-muted">
         Opens WhatsApp with your message ready — no account needed, just press
-        send.
+        send. We usually reply the same day.
       </p>
     </form>
   );

@@ -2,10 +2,26 @@ import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import ContactSection from "@/components/ContactSection";
 
+import { SITE_URL, DEFAULT_OG_IMAGE, INSTAGRAM } from "@/lib/seo";
+
 export const metadata: Metadata = {
-  title: "Contact — Phorish Shoots",
+  title: "Contact — Book Wedding Photography in Nizamabad",
   description:
-    "Visit Phorish Shoots in Mubaraknagar, Nizamabad — 4.9 stars from 85 Google reviews. Call 085003 62643 or book on WhatsApp.",
+    "Book Phorish Shoots in Mubaraknagar, Nizamabad — 4.9 stars from 85 Google reviews. Wedding, pre-wedding, newborn & toddler photography across Telangana & India. Call +91 85003 62643 or WhatsApp.",
+  keywords: [
+    "book wedding photographer Nizamabad",
+    "Phorish Shoots contact",
+    "wedding photography packages Telangana",
+  ],
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    type: "website",
+    url: `${SITE_URL}/contact`,
+    title: "Contact Phorish Shoots — Book Your Date in Nizamabad",
+    description:
+      "4.9 stars from 85 Google reviews. Call +91 85003 62643 or book on WhatsApp — wedding dates fill fast.",
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Contact Phorish Shoots wedding photography studio" }],
+  },
 };
 
 const MAPS_URL = "https://maps.app.goo.gl/BLWq2ZWdHid7ptkXA";
@@ -13,9 +29,11 @@ const MAPS_URL = "https://maps.app.goo.gl/BLWq2ZWdHid7ptkXA";
 const SCHEMA = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": `${SITE_URL}/contact#studio`,
   name: "Phorish Shoots",
+  image: DEFAULT_OG_IMAGE,
   description:
-    "Professional photography service specializing in weddings and baby portraits.",
+    "Documentary wedding photographer in Nizamabad — weddings, pre-wedding, newborn, toddler and modeling photography across Telangana & India.",
   address: {
     "@type": "PostalAddress",
     streetAddress:
@@ -25,10 +43,27 @@ const SCHEMA = {
     postalCode: "503003",
     addressCountry: "IN",
   },
+  geo: { "@type": "GeoCoordinates", latitude: 18.702, longitude: 78.1218 },
   telephone: "+91-8500362643",
-  url: "https://www.instagram.com/phorish_shoots/",
+  email: "phorishshoots@gmail.com",
+  url: SITE_URL,
+  sameAs: [INSTAGRAM, MAPS_URL],
   hasMap: MAPS_URL,
-  openingHours: "Mo-Su 00:00-20:30",
+  priceRange: "₹₹",
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+    opens: "00:00",
+    closes: "20:30",
+  },
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "4.9",

@@ -6,41 +6,28 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import type { HomeVM } from "@/lib/content";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 // Fanned trio: the middle frame sits front and centre, the sides tuck
 // behind it. GSAP owns the wing-open (sides unfold from the centre like
 // wings); Tailwind only handles width/overlap so there is no transform fight.
-const FAN = [
+// Layout per slot is fixed; images/labels/hrefs come from the CMS.
+const FAN_LAYOUT = [
   {
-    href: "/pre-wedding",
-    label: "Pre-Wedding",
-    file: "/phorish-extract/pre-wedding/01_691eb2_37440b721b684ffda83177d7584d78b6_mv2.jpg",
-    alt: "Pre-wedding portrait photographed by Phorish Shoots",
-    position: "object-[center_30%]",
     card: "z-10 w-[36%] -mr-8 md:-mr-12",
     hook: "fan-left",
     sizes: "(min-width: 1024px) 24vw, 36vw",
     priority: false,
   },
   {
-    href: "/weddings",
-    label: "Weddings",
-    file: "/phorish-extract/wedding/01_691eb2_e4a1b776ccc84dca9a796d28544e30fc_mv2.jpg",
-    alt: "Wedding ceremony photographed by Phorish Shoots",
-    position: "object-[center_35%]",
     card: "z-20 w-[40%]",
     hook: "fan-center",
     sizes: "(min-width: 1024px) 26vw, 40vw",
     priority: true,
   },
   {
-    href: "/new-born",
-    label: "New Born",
-    file: "/phorish-extract/newborn/01_691eb2_99b46f051bc54ddf8a8a5510dcd96356_mv2.jpg",
-    alt: "Newborn photograph by Phorish Shoots",
-    position: "object-[center_40%]",
     card: "z-10 w-[36%] -ml-8 md:-ml-12",
     hook: "fan-right",
     sizes: "(min-width: 1024px) 24vw, 36vw",
@@ -48,8 +35,9 @@ const FAN = [
   },
 ];
 
-export default function HomeHero() {
+export default function HomeHero({ home }: { home: HomeVM }) {
   const scope = useRef<HTMLElement>(null);
+  const FAN = home.tiles.slice(0, 3);
 
   useGSAP(
     () => {
@@ -157,6 +145,7 @@ export default function HomeHero() {
   return (
     <section
       ref={scope}
+      aria-labelledby="home-hero-heading"
       className="overflow-hidden border-b border-black/10 px-5 py-16 md:px-10 md:py-24"
     >
       <div className="mx-auto flex max-w-[1360px] flex-col items-center text-center">
@@ -164,20 +153,18 @@ export default function HomeHero() {
           className="hero-rise flex w-full max-w-2xl flex-col items-center"
           style={{ animationDelay: "0ms" }}
         >
-          <p className="eyebrow">Nizamabad · since 2020</p>
-          <h1 className="serif-display mt-5 text-[11vw] sm:text-5xl md:text-6xl">
-            Real people, real emotions,
-            <span className="block italic">timeless memories.</span>
+          <p className="eyebrow">{home.heroEyebrow}</p>
+          <h1 id="home-hero-heading" className="serif-display mt-5 text-[11vw] sm:text-5xl md:text-6xl">
+            {home.heroH1A}
+            <span className="block italic">{home.heroH1B}</span>
           </h1>
         </div>
 
         <p
-          className="hero-rise mt-6 max-w-xl text-[0.95rem] leading-7 text-muted"
+          className="hero-rise mt-6 max-w-xl text-[1rem] leading-8 text-muted"
           style={{ animationDelay: "120ms" }}
         >
-          Harish &amp; Dhanyasri Pipari have covered 100+ celebrations across
-          India — documentary frames from the rituals, the tears and the quiet
-          edges of the day.
+          {home.heroSub}
         </p>
 
         {/* Full-bleed on phones so the frames stay large enough to read;
@@ -187,10 +174,12 @@ export default function HomeHero() {
             className="relative flex w-full items-center justify-center"
             style={{ perspective: "1200px" }}
           >
-            {FAN.map((tile) => (
+            {FAN.map((tile, i) => {
+              const layout = FAN_LAYOUT[i] ?? FAN_LAYOUT[1];
+              return (
               <div
-                key={tile.href}
-                className={`relative shrink-0 ${tile.card} ${tile.hook}`}
+                key={`${tile.href}-${i}`}
+                className={`relative shrink-0 ${layout.card} ${layout.hook}`}
               >
                 <Link
                   href={tile.href}
@@ -200,8 +189,8 @@ export default function HomeHero() {
                     src={tile.file}
                     alt={tile.alt}
                     fill
-                    priority={tile.priority}
-                    sizes={tile.sizes}
+                    priority={layout.priority}
+                    sizes={layout.sizes}
                     className={`object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] ${tile.position}`}
                   />
                   <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#1a1410]/85 to-transparent px-3 pt-10 pb-3">
@@ -211,7 +200,8 @@ export default function HomeHero() {
                   </span>
                 </Link>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
@@ -221,12 +211,14 @@ export default function HomeHero() {
         >
           <a
             href="#services"
+            aria-label="See wedding photography services and galleries"
             className="inline-flex h-12 w-full items-center justify-center bg-foreground px-7 text-[11px] tracking-[0.22em] uppercase text-background transition-colors hover:bg-terracotta sm:w-auto"
           >
             See the work
           </a>
           <Link
             href="/about"
+            aria-label="About Phorish Shoots wedding photography studio"
             className="inline-flex h-12 items-center bg-foreground px-7 text-[11px] tracking-[0.22em] uppercase text-background transition-colors hover:bg-terracotta"
           >
             About the studio
@@ -234,10 +226,10 @@ export default function HomeHero() {
         </div>
 
         <p
-          className="hero-rise mt-6 text-xs font-medium tracking-[0.08em] text-muted"
+          className="hero-rise mt-6 text-[13px] font-medium tracking-[0.08em] text-muted"
           style={{ animationDelay: "680ms" }}
         >
-          100+ weddings covered · Documentary, candid &amp; editorial
+          {home.heroProof}
         </p>
       </div>
     </section>

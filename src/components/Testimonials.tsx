@@ -9,54 +9,6 @@ type Testimonial = {
   role: string;
 };
 
-const TESTIMONIALS: Testimonial[] = [
-  {
-    text: "They didn't just take photos — they gave us our day back. Every ritual, every tear, held exactly as it happened.",
-    name: "Sruthi & Kiran",
-    role: "Wedding · Nizamabad",
-  },
-  {
-    text: "We are camera-shy people, but Harish made us forget the lens existed. Our pre-wedding feels like us, not a shoot.",
-    name: "Madhuri & Sandeep",
-    role: "Pre-Wedding · Hyderabad",
-  },
-  {
-    text: "Our daughter slept through half the session and they still came home with magic. Gentle, patient, invisible.",
-    name: "Lakshmi & Arvind",
-    role: "New Born · Nizamabad",
-  },
-  {
-    text: "The teaser had my mother in tears within a day. The full film felt like reliving the wedding with better light.",
-    name: "Divya & Rohit",
-    role: "Wedding · Karimnagar",
-  },
-  {
-    text: "Chasing a two-year-old with a camera is chaos. They turned it into the happiest album on our shelf.",
-    name: "Priya & Naveen",
-    role: "Toddler · Hyderabad",
-  },
-  {
-    text: "Editorial eye, documentary heart. My portfolio finally looks like the work I want to be hired for.",
-    name: "Ananya Rao",
-    role: "Modeling · Hyderabad",
-  },
-  {
-    text: "Guests are still talking about how unobtrusive they were — and then the photos arrived and nobody missed a thing.",
-    name: "Kavya & Aditya",
-    role: "Wedding · Warangal",
-  },
-  {
-    text: "Golden hour, an empty fort, and two people who knew exactly when to step back. Worth every rupee.",
-    name: "Sneha & Varun",
-    role: "Pre-Wedding · Bidar",
-  },
-  {
-    text: "Professional from the first call to the final gallery delivery. Private links, quick edits, zero stress.",
-    name: "Meera & Karthik",
-    role: "Wedding · Nizamabad",
-  },
-];
-
 function initials(name: string) {
   return name
     .replace(/&/g, " ")
@@ -71,10 +23,10 @@ function initials(name: string) {
 function TestimonialCard({ text, name, role }: Testimonial) {
   return (
     <figure className="w-full max-w-xs rounded-2xl border border-black/10 bg-cream p-8 shadow-[0_18px_40px_rgba(26,20,16,0.08)]">
-      <div aria-label="5 out of 5 stars" className="text-sm tracking-[0.2em] text-terracotta">
-        ★★★★★
+      <div role="img" aria-label="Rated 5 out of 5 stars" className="text-sm tracking-[0.2em] text-terracotta">
+        <span aria-hidden>★★★★★</span>
       </div>
-      <blockquote className="mt-4 text-[0.9375rem] leading-7 text-foreground/85">
+      <blockquote className="mt-4 text-[1rem] leading-8 text-foreground/90">
         &ldquo;{text}&rdquo;
       </blockquote>
       <figcaption className="mt-6 flex items-center gap-3">
@@ -85,10 +37,10 @@ function TestimonialCard({ text, name, role }: Testimonial) {
           {initials(name)}
         </span>
         <span className="flex flex-col">
-          <span className="text-sm font-medium tracking-tight text-foreground">
+          <span className="text-[0.9375rem] font-medium tracking-tight text-foreground">
             {name}
           </span>
-          <span className="text-xs tracking-tight text-muted">{role}</span>
+          <span className="text-[13px] tracking-tight text-muted">{role}</span>
         </span>
       </figcaption>
     </figure>
@@ -107,7 +59,7 @@ function TestimonialsColumn({
   reverse?: boolean;
 }) {
   return (
-    <div className={className}>
+    <div className={className} aria-hidden={undefined}>
       <motion.div
         animate={reverse ? { translateY: ["-50%", "0%"] } : { translateY: "-50%" }}
         transition={{
@@ -121,7 +73,9 @@ function TestimonialsColumn({
         {[0, 1].map((copy) => (
           <React.Fragment key={copy}>
             {testimonials.map((t) => (
-              <TestimonialCard key={`${copy}-${t.name}`} {...t} />
+              <div key={`${copy}-${t.name}`} aria-hidden={copy === 1 || undefined}>
+                <TestimonialCard {...t} />
+              </div>
             ))}
           </React.Fragment>
         ))}
@@ -130,13 +84,13 @@ function TestimonialsColumn({
   );
 }
 
-export default function Testimonials() {
-  const firstColumn = TESTIMONIALS.slice(0, 3);
-  const secondColumn = TESTIMONIALS.slice(3, 6);
-  const thirdColumn = TESTIMONIALS.slice(6, 9);
+export default function Testimonials({ items }: { items: Testimonial[] }) {
+  const firstColumn = items.slice(0, 3);
+  const secondColumn = items.slice(3, 6);
+  const thirdColumn = items.slice(6, 9);
 
   return (
-    <section className="relative my-20 overflow-hidden">
+    <section aria-labelledby="testimonials-heading" className="relative my-20 overflow-hidden">
       <div className="mx-auto max-w-[1360px] px-5 md:px-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -145,12 +99,13 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="mx-auto flex max-w-[540px] flex-col items-center justify-center text-center"
         >
-          <p className="eyebrow">Love notes</p>
-          <h2 className="serif-display mt-4 text-5xl md:text-6xl">
+          <p className="eyebrow">Client love notes · 4.9 ★ from 85 Google reviews</p>
+          <h2 id="testimonials-heading" className="serif-display mt-4 text-5xl md:text-6xl">
             Words from our couples
           </h2>
-          <p className="mt-5 text-[0.9375rem] leading-7 text-muted">
-            Real families, real celebrations — and the frames they took home.
+          <p className="mt-5 text-[1rem] leading-8 text-muted">
+            Real weddings, newborn sessions and family celebrations across
+            Nizamabad, Hyderabad and Telangana — and the frames they took home.
           </p>
         </motion.div>
 

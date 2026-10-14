@@ -18,7 +18,6 @@ const RIGHT_LINKS = [
   { href: "/modeling", label: "Modeling" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
-  { href: "/client-area", label: "Client Area" },
 ];
 
 const ALL_LINKS = [
@@ -57,11 +56,12 @@ export default function Header() {
       {/* 1fr auto 1fr keeps the wordmark dead centre no matter how the two
           link clusters are sized — auto-placement alone would not */}
       <div className="mx-auto grid h-[72px] max-w-[1360px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 md:px-10">
-        <nav className="hidden items-center gap-6 whitespace-nowrap lg:flex">
+        <nav aria-label="Primary — galleries" className="hidden items-center gap-6 whitespace-nowrap lg:flex">
           {LEFT_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
+              aria-current={pathname === link.href ? "page" : undefined}
               className={`nav-link ${pathname === link.href ? "active" : ""}`}
             >
               {link.label}
@@ -72,11 +72,12 @@ export default function Header() {
         <Link
           href="/"
           onClick={() => setOpen(false)}
+          aria-label="Phorish Shoots — home"
           className="col-start-2 justify-self-center"
         >
           <Image
             src="/logo.png"
-            alt="Phorish Shoots"
+            alt="Phorish Shoots — wedding photographer in Nizamabad"
             width={120}
             height={40}
             priority
@@ -85,11 +86,12 @@ export default function Header() {
         </Link>
 
         <div className="col-start-3 flex items-center justify-end gap-6">
-          <nav className="hidden items-center gap-6 whitespace-nowrap lg:flex">
+          <nav aria-label="Primary — studio" className="hidden items-center gap-6 whitespace-nowrap lg:flex">
             {RIGHT_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
+                aria-current={pathname === link.href ? "page" : undefined}
                 className={`nav-link ${pathname === link.href ? "active" : ""}`}
               >
                 {link.label}
@@ -101,6 +103,7 @@ export default function Header() {
             href={INSTAGRAM}
             target="_blank"
             rel="noreferrer"
+            aria-label="Book Phorish Shoots on Instagram"
             className="hidden text-[11px] tracking-[0.22em] uppercase lg:inline"
           >
             Book
@@ -125,11 +128,12 @@ export default function Header() {
           open ? "block" : "hidden"
         }`}
       >
-        <nav className="flex flex-col">
+        <nav aria-label="Mobile" className="flex flex-col">
           {ALL_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
+              aria-current={pathname === link.href ? "page" : undefined}
               onClick={() => setOpen(false)}
               className={`border-b border-black/10 py-4 text-[13px] tracking-[0.28em] uppercase ${
                 pathname === link.href ? "text-terracotta" : ""

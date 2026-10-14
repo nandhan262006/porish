@@ -1,4 +1,27 @@
+"use client";
+
 import * as React from "react";
+
+/** Phones get their own corridor geometry (fewer, bigger, closer cards). */
+const MOBILE_QUERY = "(max-width: 767px)";
+
+function useIsMobile(query: string = MOBILE_QUERY): boolean {
+  const subscribe = React.useCallback(
+    (onChange: () => void) => {
+      const mql = window.matchMedia(query);
+      mql.addEventListener("change", onChange);
+      return () => mql.removeEventListener("change", onChange);
+    },
+    [query],
+  );
+  const getSnapshot = React.useCallback(
+    () => window.matchMedia(query).matches,
+    [query],
+  );
+  // SSR has no viewport: render desktop first so hydration always matches.
+  const getServerSnapshot = React.useCallback(() => false, []);
+  return React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+}
 
 /* ── the corridor ────────────────────────────────────────────────
  * Two rails of cards ride from far behind the screen toward the
@@ -142,6 +165,17 @@ export type ImageStreamHeroProps = {
   axis?: number;
   /** Override any part of the corridor geometry. Merged over the defaults. */
   path?: CorridorPath;
+  /**
+   * Mobile-only overrides (<=767px). Merged over the resolved desktop
+   * geometry, so you only specify what differs. Phones read the same
+   * 9-per-rail density as small and busy — fewer cards plus bigger
+   * card/exit sizes make each frame large and close-up instead.
+   */
+  mobilePath?: CorridorPath;
+  /** Cards per rail on mobile. @default cards */
+  mobileCards?: number;
+  /** Seconds per card trip on mobile. @default speed */
+  mobileSpeed?: number;
   /** Content rendered above the corridor. */
   children?: React.ReactNode;
   className?: string;
@@ -153,6 +187,9 @@ export function ImageStreamHero({
   speed = 18,
   axis = 55,
   path,
+  mobilePath,
+  mobileCards,
+  mobileSpeed,
   children,
   className,
   ...props
@@ -162,7 +199,16 @@ export function ImageStreamHero({
   const left = `ish-l-${id}`;
   const card = `ish-c-${id}`;
 
-  const p = React.useMemo(() => ({ ...PATH, ...path }), [path]);
+  const isMobile = useIsMobile();
+  const mobileActive =
+    isMobile && (mobilePath !== undefined || mobileCards !== undefined || mobileSpeed !== undefined);
+
+  const p = React.useMemo(
+    () => ({ ...PATH, ...path, ...(mobileActive ? mobilePath : null) }),
+    [path, mobilePath, mobileActive],
+  );
+  const activeCards = mobileActive && mobileCards !== undefined ? mobileCards : cards;
+  const activeSpeed = mobileActive && mobileSpeed !== undefined ? mobileSpeed : speed;
 
   const css = React.useMemo(
     () =>
@@ -195,7 +241,7 @@ export function ImageStreamHero({
           style={{ transformStyle: "preserve-3d" }}
         >
           {[right, left].map((name) =>
-            Array.from({ length: cards }, (_, i) => {
+            Array.from({ length: activeCards }, (_, i) => {
               // Both rails walk the same sequence, so the left side mirrors
               // the right at every depth.
               const img = images[i % Math.max(images.length, 1)];
@@ -211,10 +257,10 @@ export function ImageStreamHero({
                     marginLeft: `${-p.cardWidth / 2}cqw`,
                     marginTop: `${-p.cardHeight / 2}cqw`,
                     borderRadius: `${p.cardRadius}cqw`,
-                    animation: `${name} ${speed}s linear infinite`,
+                    animation: `${name} ${activeSpeed}s linear infinite`,
                     // Negative delay drops each card mid-flight, so the
                     // corridor is already full on the first frame.
-                    animationDelay: `${-(i * speed) / cards}s`,
+                    animationDelay: `${-(i * activeSpeed) / activeCards}s`,
                     backfaceVisibility: "hidden",
                   }}
                 >

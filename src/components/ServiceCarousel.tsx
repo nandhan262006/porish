@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 type Slide = {
   key: string;
@@ -14,56 +14,14 @@ type Slide = {
   style: string;
 };
 
-const SERVICES: Omit<Slide, "key">[] = [
-  {
-    href: "/weddings",
-    title: "Weddings",
-    subtitle: "The day, held as it happened.",
-    image: "/phorish-extract/wedding/03_691eb2_126314bb98ff4e67b667d3ac43c65122_mv2.jpg",
-    frames: 26,
-    style: "Documentary",
-  },
-  {
-    href: "/pre-wedding",
-    title: "Pre-Wedding",
-    subtitle: "Quiet hours before the vows.",
-    image: "/phorish-extract/pre-wedding/03_691eb2_de9f6ea47ae0416dbe35866aca7b5e7d_mv2.jpg",
-    frames: 26,
-    style: "Candid & editorial",
-  },
-  {
-    href: "/new-born",
-    title: "New Born",
-    subtitle: "The earliest days, gently.",
-    image: "/phorish-extract/newborn/03_691eb2_a5bebcde9cca48baab0e77dab5987d5e_mv2.jpg",
-    frames: 28,
-    style: "Gentle & unposed",
-  },
-  {
-    href: "/toddlers",
-    title: "Toddlers",
-    subtitle: "Childhood, unfiltered.",
-    image: "/phorish-extract/babybump-toddlers/03_691eb2_5e24279512994a59bfaf07d4dd78b137_mv2.jpg",
-    frames: 27,
-    style: "Unfiltered",
-  },
-  {
-    href: "/modeling",
-    title: "Modeling",
-    subtitle: "Portraits with intent.",
-    image: "/phorish-extract/modeling/03_691eb2_31fe9dfabaa1453fa174e169a467f210_mv2.jpg",
-    frames: 25,
-    style: "Editorial",
-  },
-];
-
 // The reel runs twice so a 7-wide window never shows the same frame twice.
-const SLIDES: Slide[] = [...SERVICES, ...SERVICES].map((service, i) => ({
-  ...service,
-  key: `${service.href}-${i}`,
-}));
-
-const COUNT = SLIDES.length;
+function buildSlides(services: Omit<Slide, "key">[]): Slide[] {
+  const doubled = [...services, ...services];
+  return doubled.map((service, i) => ({
+    ...service,
+    key: `${service.href}-${i}`,
+  }));
+}
 
 type Dims = {
   cardW: number;
@@ -86,11 +44,18 @@ function measure(): Dims {
   return { cardW, spacing: Math.round(cardW * 0.66), maxD: 3, angle: 18 };
 }
 
-function wrapIndex(i: number) {
-  return ((i % COUNT) + COUNT) % COUNT;
+function wrapIndexWith(count: number, i: number) {
+  return ((i % count) + count) % count;
 }
 
-export default function ServiceCarousel() {
+export default function ServiceCarousel({
+  services,
+}: {
+  services: Omit<Slide, "key">[];
+}) {
+  const slides = useMemo(() => buildSlides(services), [services]);
+  const COUNT = slides.length;
+  const wrapIndex = useCallback((i: number) => wrapIndexWith(COUNT, i), [COUNT]);
   const [dims, setDims] = useState<Dims>({ cardW: 300, spacing: 200, maxD: 3, angle: 18 });
   const [active, setActive] = useState(0);
 
@@ -114,7 +79,7 @@ export default function ServiceCarousel() {
       activeRef.current = a;
       setActive(a);
     }
-  }, []);
+  }, [wrapIndex]);
 
   // Shortest-path seek on the infinite loop.
   const goTo = useCallback(
@@ -123,7 +88,7 @@ export default function ServiceCarousel() {
       target.current += delta;
       publishActive();
     },
-    [publishActive],
+    [COUNT, publishActive],
   );
 
   const step = useCallback(
@@ -186,7 +151,7 @@ export default function ServiceCarousel() {
       window.removeEventListener("resize", update);
       cancelAnimationFrame(raf);
     };
-  }, [publishActive]);
+  }, [COUNT, publishActive]);
 
   // Horizontal-wheel only: vertical scroll always belongs to the page.
   useEffect(() => {
@@ -245,21 +210,21 @@ export default function ServiceCarousel() {
     goTo(index);
   }
 
-  const meta = SERVICES[active % SERVICES.length];
+  const meta = services[active % services.length];
 
   return (
-    <section id="services" className="scroll-mt-20 overflow-hidden bg-[#050505] py-20 text-[#f6f1ea] md:py-28">
+    <section id="services" aria-labelledby="services-heading" className="scroll-mt-20 overflow-hidden bg-[#050505] py-20 text-[#f6f1ea] md:py-28">
       <div className="mx-auto max-w-[1360px] px-5 md:px-10">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <p className="text-[11px] font-medium tracking-[0.28em] uppercase text-[#f3c7b6]">
-              Services
+            <p className="text-[12px] font-semibold tracking-[0.22em] uppercase text-[#f3c7b6]">
+              Wedding & family photography services
             </p>
-            <h2 className="serif-display mt-3 text-5xl text-white md:text-7xl">
+            <h2 id="services-heading" className="serif-display mt-3 text-5xl text-white md:text-7xl">
               What we shoot
             </h2>
           </div>
-          <p className="hidden max-w-[220px] text-right text-sm leading-6 text-white/40 md:block">
+          <p className="hidden max-w-[220px] text-right text-[0.9375rem] leading-7 text-white/70 md:block">
             Drag, scroll sideways, or tap a frame to bring it centre.
           </p>
         </div>
@@ -282,7 +247,10 @@ export default function ServiceCarousel() {
         className="relative mx-auto mt-12 w-full cursor-grab touch-pan-y select-none active:cursor-grabbing md:mt-14"
         style={{ height: cardH + 24, perspective: "1400px" }}
       >
-        {SLIDES.map((slide, i) => (
+        {slides.map((slide, i) => {
+          const duplicate = i >= services.length;
+          const isActive = wrapIndex(i) === active;
+          return (
           <Link
             key={slide.key}
             href={slide.href}
@@ -290,14 +258,16 @@ export default function ServiceCarousel() {
               cardRefs.current[i] = el;
             }}
             onClick={(e) => onCardClick(e, i)}
-            aria-label={`${slide.title} gallery`}
-            aria-current={wrapIndex(i) === active}
+            aria-label={`${slide.title} photography gallery in Nizamabad — open gallery`}
+            aria-current={isActive && !duplicate ? "true" : undefined}
+            aria-hidden={duplicate || undefined}
+            tabIndex={duplicate ? -1 : undefined}
             className="absolute top-0 left-1/2 overflow-hidden rounded-2xl bg-[#141414] shadow-[0_30px_60px_rgba(0,0,0,0.55)]"
             style={{ width: dims.cardW, height: cardH, marginLeft: -dims.cardW / 2 }}
           >
             <Image
               src={slide.image}
-              alt=""
+              alt={duplicate ? "" : `${slide.title} ${slide.style.toLowerCase()} photography by Phorish Shoots in Nizamabad`}
               fill
               priority={i === 0}
               draggable={false}
@@ -305,15 +275,16 @@ export default function ServiceCarousel() {
               className="object-cover"
             />
           </Link>
-        ))}
+          );
+        })}
       </div>
 
       <div className="mx-auto max-w-[1360px] px-5 md:px-10">
         <div key={active} className="caption-fade mx-auto mt-10 max-w-2xl text-center md:mt-12">
           <h3 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
-            {meta.title}
+            {meta.title} photography
           </h3>
-          <p className="mt-2 text-sm text-white/50">{meta.subtitle}</p>
+          <p className="mt-2 text-[0.9375rem] leading-7 text-white/75">{meta.subtitle} Nizamabad · Hyderabad · across India.</p>
           <dl className="mx-auto mt-8 grid max-w-xl grid-cols-1 gap-0 text-left sm:grid-cols-2 sm:gap-x-12">
             {[
               ["Frames", `${meta.frames} in the gallery`],
@@ -324,7 +295,7 @@ export default function ServiceCarousel() {
                 key={term}
                 className="flex items-baseline justify-between gap-6 border-t border-white/10 py-3"
               >
-                <dt className="text-[11px] tracking-[0.22em] uppercase text-white/40">
+                <dt className="text-[11px] tracking-[0.22em] uppercase text-white/60">
                   {term}
                 </dt>
                 <dd className="text-sm text-white">{value}</dd>
@@ -333,6 +304,7 @@ export default function ServiceCarousel() {
           </dl>
           <Link
             href={meta.href}
+            aria-label={`Open the ${meta.title} photography gallery`}
             className="mt-8 inline-block border-b border-white/40 pb-1 text-[11px] tracking-[0.24em] uppercase text-white"
           >
             Open {meta.title} gallery
