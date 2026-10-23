@@ -1,22 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const facts = [
-  { value: "2020", label: "Studio opened" },
-  { value: "100+", label: "Weddings covered" },
-  { value: "India", label: "Stories on the road" },
-];
-
 export default function HomeAbout({
   names,
   paragraph1,
   paragraph2,
   image,
+  stats,
 }: {
   names: string;
   paragraph1: string;
   paragraph2: string;
   image: string;
+  stats: { value: string; label: string }[];
 }) {
   const [nameA, nameB] = names.split(/ & /);
   return (
@@ -52,9 +48,9 @@ export default function HomeAbout({
             <p>{paragraph2}</p>
           </div>
 
-          <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-black/10 pt-6">
-            {facts.map((fact) => (
-              <div key={fact.label}>
+          <dl className={`mt-10 grid gap-4 border-t border-black/10 pt-6 ${stats.length === 3 ? "grid-cols-3" : "grid-cols-2"}`}>
+            {stats.map((fact) => (
+              <div key={fact.label || fact.value}>
                 <dt className="serif-display text-3xl md:text-4xl">{fact.value}</dt>
                 <dd className="mt-2 text-[11px] tracking-[0.14em] uppercase text-muted">
                   {fact.label}

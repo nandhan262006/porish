@@ -52,6 +52,12 @@ const GROUPS: {
       { key: "about_names", label: "Names" },
       { key: "about_p1", label: "Paragraph 1", textarea: true, rows: 4 },
       { key: "about_p2", label: "Paragraph 2", textarea: true, rows: 4 },
+      { key: "about_stat_1_value", label: "Stat 1 — value", hint: "The big number, e.g. 2020 or 100+" },
+      { key: "about_stat_1_label", label: "Stat 1 — label", hint: "The small caption below it" },
+      { key: "about_stat_2_value", label: "Stat 2 — value" },
+      { key: "about_stat_2_label", label: "Stat 2 — label" },
+      { key: "about_stat_3_value", label: "Stat 3 — value" },
+      { key: "about_stat_3_label", label: "Stat 3 — label" },
     ],
   },
 ];

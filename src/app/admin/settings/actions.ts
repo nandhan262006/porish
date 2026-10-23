@@ -30,6 +30,12 @@ const EDITABLE_SETTINGS = [
   "about_names",
   "about_p1",
   "about_p2",
+  "about_stat_1_value",
+  "about_stat_1_label",
+  "about_stat_2_value",
+  "about_stat_2_label",
+  "about_stat_3_value",
+  "about_stat_3_label",
 ] as const;
 
 export async function saveSettings(formData: FormData) {

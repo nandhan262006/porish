@@ -123,6 +123,12 @@ const SETTINGS = {
   about_p2:
     "Harish films, Dhanyasri photographs — but we both chase the same thing. The best photographs don't just show how a moment looked. They remind you how it felt.",
   about_image: "/ABOUT.png",
+  about_stat_1_value: "2020",
+  about_stat_1_label: "Studio opened",
+  about_stat_2_value: "100+",
+  about_stat_2_label: "Weddings covered",
+  about_stat_3_value: "India",
+  about_stat_3_label: "Stories on the road",
 };
 
 // Fanned hero trio — card classes / GSAP hooks stay code-driven by index.

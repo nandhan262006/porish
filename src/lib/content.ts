@@ -196,6 +196,8 @@ export type HomeTileVM = {
   position: string;
 };
 
+export type HomeStatVM = { value: string; label: string };
+
 export type HomeVM = {
   heroEyebrow: string;
   heroH1A: string;
@@ -206,8 +208,24 @@ export type HomeVM = {
   aboutP1: string;
   aboutP2: string;
   aboutImage: string;
+  aboutStats: HomeStatVM[];
   tiles: HomeTileVM[];
 };
+
+// Fallbacks when the settings keys don't exist yet (pre-seed DBs). Admin
+// fields are seeded with the same values, so blanks in admin are honoured
+// as "hide this stat".
+const DEFAULT_ABOUT_STATS: HomeStatVM[] = [
+  { value: "2020", label: "Studio opened" },
+  { value: "100+", label: "Weddings covered" },
+  { value: "India", label: "Stories on the road" },
+];
+
+const aboutStats = (settings: SettingsVM): HomeStatVM[] =>
+  [1, 2, 3].map((n) => ({
+    value: settings[`about_stat_${n}_value`] ?? DEFAULT_ABOUT_STATS[n - 1].value,
+    label: settings[`about_stat_${n}_label`] ?? DEFAULT_ABOUT_STATS[n - 1].label,
+  })).filter((s) => s.value || s.label);
 
 const loadHome = async (): Promise<HomeVM> => {
   const db = getDb();
@@ -229,6 +247,7 @@ const loadHome = async (): Promise<HomeVM> => {
     aboutP1: settings.about_p1 ?? "",
     aboutP2: settings.about_p2 ?? "",
     aboutImage: mediaUrl(settings.about_image ?? "/ABOUT.png"),
+    aboutStats: aboutStats(settings),
     tiles: tiles.map((t) => ({
       href: t.href,
       label: t.label,

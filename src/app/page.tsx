@@ -128,6 +128,7 @@ export default async function Home() {
         paragraph1={home.aboutP1}
         paragraph2={home.aboutP2}
         image={home.aboutImage}
+        stats={home.aboutStats}
       />
       <ImageStreamHero
         images={streamImages}
