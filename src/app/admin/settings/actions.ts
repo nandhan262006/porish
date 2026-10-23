@@ -7,6 +7,10 @@ import { publish, requireAdmin } from "@/lib/admin";
 import type { UploadedMeta } from "@/lib/upload";
 
 // Keys the dashboard may write. Anything else in the table is read-only.
+// NOTE: `about_image` is deliberately NOT here — it is managed by the
+// About portrait uploader/photo picker (setAboutImage / pickAboutImage).
+// Listing it would blank the portrait on every settings save, because the
+// main form has no about_image field.
 const EDITABLE_SETTINGS = [
   "phone_display",
   "phone_tel",
@@ -26,7 +30,6 @@ const EDITABLE_SETTINGS = [
   "about_names",
   "about_p1",
   "about_p2",
-  "about_image",
 ] as const;
 
 export async function saveSettings(formData: FormData) {
