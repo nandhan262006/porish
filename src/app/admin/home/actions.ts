@@ -18,7 +18,7 @@ export async function saveTile(formData: FormData) {
   if (!href || !label) throw new Error("Link and label are required.");
   await getDb()
     .update(table)
-    .set({ href, label, alt, position: position || "object-[center_35%]" })
+    .set({ href, label, alt, position: position || "center 35%" })
     .where(eq(table.id, id));
   publish(TAGS.home);
 }
@@ -86,7 +86,7 @@ export async function createTile(formData: FormData) {
     label,
     src,
     alt: label,
-    position: "object-[center_35%]",
+    position: "center 35%",
     sortOrder: next,
     visible: 1,
   });

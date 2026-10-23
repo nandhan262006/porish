@@ -2,6 +2,7 @@
 
 import { useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { isControlFlow } from "./AdminForm";
 
 export type PickablePhoto = {
   /** Raw stored path (what goes into the DB). */
@@ -42,6 +43,16 @@ export default function PhotoPicker({
       // The tile thumbnail is server-rendered — refresh so the picked
       // photo appears without a manual reload.
       router.refresh();
+    } catch (e) {
+      // Session expiry surfaces as a redirect — send the admin to login
+      // instead of failing silently with the dialog stuck open.
+      if (isControlFlow(e)) {
+        dialogRef.current?.close();
+        router.push("/admin/login");
+        router.refresh();
+        return;
+      }
+      throw e;
     } finally {
       setBusy(false);
     }

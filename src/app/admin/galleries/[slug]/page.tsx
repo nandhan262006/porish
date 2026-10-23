@@ -53,8 +53,8 @@ export default async function AdminGalleryPhotosPage({
         </a>
         {" · "}<span data-live>{photos.filter((p) => p.visible).length}</span> of{" "}
         <span data-total>{photos.length}</span> frames live
-        {" · ★ "}<span data-featured>{photos.filter((p) => p.featured === 1).length}</span>{" "}
-        on the homepage strip. Star as many as you want — every starred photo shows there. Hide removes a photo from the live gallery only. Use ↑ ↓ to reorder frames.
+      {" · ★ "}<span data-featured>{photos.filter((p) => p.featured === 1 && p.visible).length}</span>{" "}
+      on the homepage strip. Star as many as you want — every starred live photo shows there. Hide removes a photo from the live gallery only. Use ↑ ↓ to reorder frames.
       </p>
 
       <div className="mt-6 max-w-lg">

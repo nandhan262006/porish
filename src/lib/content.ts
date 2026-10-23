@@ -196,6 +196,15 @@ export type HomeTileVM = {
   position: string;
 };
 
+/** Stored crop values arrive either as legacy Tailwind classes
+ *  ("object-[center_35%]", from the seed) or plain CSS ("center 35%").
+ *  Normalise to CSS so the site can apply it inline — Tailwind never
+ *  compiles arbitrary classes that only live in the database. */
+export function objectPosition(raw: string): string {
+  const m = raw.match(/^object-\[(.+)\]$/);
+  return m ? m[1] : raw || "center 35%";
+}
+
 export type HomeStatVM = { value: string; label: string };
 
 export type HomeVM = {
@@ -253,7 +262,7 @@ const loadHome = async (): Promise<HomeVM> => {
       label: t.label,
       file: mediaUrl(t.src),
       alt: t.alt,
-      position: t.position,
+      position: objectPosition(t.position),
     })),
   };
 };

@@ -133,9 +133,9 @@ const SETTINGS = {
 
 // Fanned hero trio — card classes / GSAP hooks stay code-driven by index.
 const HOME_TILES = [
-  ["/pre-wedding", "Pre-Wedding", "/phorish-extract/pre-wedding/01_691eb2_37440b721b684ffda83177d7584d78b6_mv2.jpg", "Pre-wedding portrait photographed by Phorish Shoots", "object-[center_30%]"],
-  ["/wedding", "Weddings", "/phorish-extract/wedding/01_691eb2_e4a1b776ccc84dca9a796d28544e30fc_mv2.jpg", "Wedding ceremony photographed by Phorish Shoots", "object-[center_35%]"],
-  ["/newborn", "New Born", "/phorish-extract/newborn/01_691eb2_99b46f051bc54ddf8a8a5510dcd96356_mv2.jpg", "Newborn photograph by Phorish Shoots", "object-[center_40%]"],
+  ["/pre-wedding", "Pre-Wedding", "/phorish-extract/pre-wedding/01_691eb2_37440b721b684ffda83177d7584d78b6_mv2.jpg", "Pre-wedding portrait photographed by Phorish Shoots", "center 30%"],
+  ["/wedding", "Weddings", "/phorish-extract/wedding/01_691eb2_e4a1b776ccc84dca9a796d28544e30fc_mv2.jpg", "Wedding ceremony photographed by Phorish Shoots", "center 35%"],
+  ["/newborn", "New Born", "/phorish-extract/newborn/01_691eb2_99b46f051bc54ddf8a8a5510dcd96356_mv2.jpg", "Newborn photograph by Phorish Shoots", "center 40%"],
 ];
 
 async function main() {
@@ -148,7 +148,7 @@ async function main() {
   await db.execute(`CREATE TABLE IF NOT EXISTS faqs (id INTEGER PRIMARY KEY AUTOINCREMENT, question TEXT NOT NULL, answer TEXT NOT NULL, sort_order INTEGER NOT NULL DEFAULT 0, visible INTEGER NOT NULL DEFAULT 1)`);
   await db.execute(`CREATE TABLE IF NOT EXISTS services (slug TEXT PRIMARY KEY, title TEXT NOT NULL, subtitle TEXT NOT NULL DEFAULT '', note TEXT NOT NULL DEFAULT '', style TEXT NOT NULL DEFAULT '', frames INTEGER NOT NULL DEFAULT 0, cover_image TEXT DEFAULT '', sort_order INTEGER NOT NULL DEFAULT 0)`);
   await db.execute(`CREATE TABLE IF NOT EXISTS site_settings (key TEXT PRIMARY KEY, value TEXT NOT NULL, updated_at TEXT NOT NULL DEFAULT '')`);
-  await db.execute(`CREATE TABLE IF NOT EXISTS home_tiles (id INTEGER PRIMARY KEY AUTOINCREMENT, href TEXT NOT NULL, label TEXT NOT NULL, src TEXT NOT NULL, alt TEXT NOT NULL DEFAULT '', position TEXT NOT NULL DEFAULT 'object-[center_35%]', sort_order INTEGER NOT NULL DEFAULT 0, visible INTEGER NOT NULL DEFAULT 1)`);
+  await db.execute(`CREATE TABLE IF NOT EXISTS home_tiles (id INTEGER PRIMARY KEY AUTOINCREMENT, href TEXT NOT NULL, label TEXT NOT NULL, src TEXT NOT NULL, alt TEXT NOT NULL DEFAULT '', position TEXT NOT NULL DEFAULT 'center 35%', sort_order INTEGER NOT NULL DEFAULT 0, visible INTEGER NOT NULL DEFAULT 1)`);
 
   const t = now();
 

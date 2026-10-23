@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { getDb, schema } from "@/lib/db";
 import { isAdmin } from "@/lib/session";
 import { mediaUrl } from "@/lib/media";
+import { objectPosition } from "@/lib/content";
 import AdminForm from "@/components/admin/AdminForm";
 import Field from "@/components/admin/Field";
 import Submit, { TinyAction } from "@/components/admin/Submit";
@@ -23,6 +24,18 @@ export const dynamic = "force-dynamic";
 export const metadata = { title: "Homepage" };
 
 const SLOT_LABELS = ["Left wing", "Centre (front)", "Right wing"];
+
+// Values are plain CSS object-position — applied inline on the live site,
+// so nothing depends on Tailwind having compiled a class for it.
+const CROP_OPTIONS = [
+  { value: "center 35%", label: "Centre (default)" },
+  { value: "center 25%", label: "Upper" },
+  { value: "center 50%", label: "Lower" },
+  { value: "top", label: "Top" },
+  { value: "bottom", label: "Bottom" },
+  { value: "30% center", label: "Left" },
+  { value: "70% center", label: "Right" },
+];
 
 export default async function AdminHomePage() {
   if (!(await isAdmin())) redirect("/admin/login");
@@ -95,7 +108,13 @@ export default async function AdminHomePage() {
                   <Field name="label" label="Label" defaultValue={tile.label} />
                   <Field name="href" label="Links to" defaultValue={tile.href} hint="e.g. /wedding" />
                   <Field name="alt" label="Alt text" defaultValue={tile.alt} />
-                  <Field name="position" label="Crop focus" defaultValue={tile.position} hint="CSS object-position class, e.g. object-[center_30%]" />
+                  <Field
+                    name="position"
+                    label="Crop focus"
+                    defaultValue={objectPosition(tile.position)}
+                    options={CROP_OPTIONS}
+                    hint="How the photo sits in its tall frame."
+                  />
                   <div className="md:col-span-2">
                     <Submit />
                   </div>

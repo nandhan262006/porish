@@ -31,15 +31,22 @@ async function imageDims(file: File): Promise<{ width: number; height: number }>
 
 async function videoDims(file: File): Promise<{ width: number; height: number }> {
   return new Promise((resolve) => {
+    // Fallback so a stalled metadata read can't leave the upload stuck
+    // at "Registering…" forever — the row still gets created.
+    const timeout = setTimeout(() => resolve({ width: 1920, height: 1080 }), 4000);
+    const finish = (dims: { width: number; height: number }) => {
+      clearTimeout(timeout);
+      resolve(dims);
+    };
     const url = URL.createObjectURL(file);
     const v = document.createElement("video");
     v.preload = "metadata";
     v.onloadedmetadata = () => {
-      resolve({ width: v.videoWidth || 1920, height: v.videoHeight || 1080 });
+      finish({ width: v.videoWidth || 1920, height: v.videoHeight || 1080 });
       URL.revokeObjectURL(url);
     };
     v.onerror = () => {
-      resolve({ width: 1920, height: 1080 });
+      finish({ width: 1920, height: 1080 });
       URL.revokeObjectURL(url);
     };
     v.src = url;

@@ -41,21 +41,26 @@ export function isR2Key(src: string): boolean {
 }
 
 /** Best-effort R2 cleanup for admin deletes. Never throws — the DB row
- *  must go even if the object is already gone. Callers must only pass
- *  keys the row owns outright (never shared covers/tiles). */
+ *  must go even if the object is already gone (or R2 isn't configured,
+ *  e.g. local dev). Callers must only pass keys the row owns outright
+ *  (never shared covers/tiles). */
 export async function deleteR2Objects(keys: string[]): Promise<void> {
-  const targets = [...new Set(keys)].filter(isR2Key);
-  if (!targets.length) return;
-  const bucket = process.env.R2_BUCKET_NAME;
-  if (!bucket) return;
-  const client = getR2Client();
-  await Promise.all(
-    targets.map((key) =>
-      client
-        .send(new DeleteObjectCommand({ Bucket: bucket, Key: key }))
-        .catch((e: unknown) =>
-          console.warn(`[storage] R2 delete skipped for ${key}:`, e),
-        ),
-    ),
-  );
+  try {
+    const targets = [...new Set(keys)].filter(isR2Key);
+    if (!targets.length) return;
+    const bucket = process.env.R2_BUCKET_NAME;
+    if (!bucket) return;
+    const client = getR2Client();
+    await Promise.all(
+      targets.map((key) =>
+        client
+          .send(new DeleteObjectCommand({ Bucket: bucket, Key: key }))
+          .catch((e: unknown) =>
+            console.warn(`[storage] R2 delete skipped for ${key}:`, e),
+          ),
+      ),
+    );
+  } catch (e) {
+    console.warn("[storage] R2 cleanup skipped:", e);
+  }
 }

@@ -191,7 +191,8 @@ export default function HomeHero({ home }: { home: HomeVM }) {
                     fill
                     priority={layout.priority}
                     sizes={layout.sizes}
-                    className={`object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] ${tile.position}`}
+                    style={{ objectPosition: tile.position }}
+                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                   />
                   <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#1a1410]/85 to-transparent px-3 pt-10 pb-3">
                     <span className="block text-[10px] tracking-[0.24em] uppercase text-[#f3c7b6]">
