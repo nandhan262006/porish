@@ -264,3 +264,22 @@ button {
     overflow-x: hidden;
   }
 }
+
+@keyframes lb-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lb-in {
+  animation: lb-fade 220ms ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lb-in {
+    animation: none;
+  }
+}

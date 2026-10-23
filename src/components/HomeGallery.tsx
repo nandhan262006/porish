@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import Lightbox from "./Lightbox";
 
 export type PreviewImage = {
   file: string;
@@ -25,6 +26,7 @@ export default function HomeGallery({
   const [activeSlug, setActiveSlug] = useState(
     categories[0]?.slug ?? "",
   );
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const active =
     categories.find((c) => c.slug === activeSlug) ?? categories[0];
 
@@ -82,13 +84,12 @@ export default function HomeGallery({
           className="caption-fade mt-10 w-full columns-2 gap-0 md:columns-3 lg:columns-5"
         >
           {active.images.map((image, i) => (
-            <a
+            <button
               key={image.file}
-              href={image.file}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`${active.title} photography in Nizamabad — photo ${i + 1} of ${active.images.length}, open full size`}
-              className="block break-inside-avoid"
+              type="button"
+              onClick={() => setOpenIndex(i)}
+              aria-label={`${active.title} photography in Nizamabad — photo ${i + 1} of ${active.images.length}, open in viewer`}
+              className="block w-full cursor-pointer break-inside-avoid"
             >
               <span className="photo relative block bg-[#efe7de]">
                 <Image
@@ -101,9 +102,19 @@ export default function HomeGallery({
                   className="h-auto w-full"
                 />
               </span>
-            </a>
+            </button>
           ))}
         </div>
+
+      <Lightbox
+        images={active.images.map((image, i) => ({
+          src: image.file,
+          alt: `${active.title} photography in Nizamabad — frame ${i + 1} of ${active.images.length}`,
+        }))}
+        index={openIndex}
+        onNavigate={setOpenIndex}
+        onClose={() => setOpenIndex(null)}
+      />
 
       <div className="mx-auto mt-8 flex max-w-[1360px] flex-col items-center justify-between gap-4 px-5 sm:flex-row md:px-10">
           <p className="text-[12px] font-medium tracking-[0.18em] uppercase text-muted">

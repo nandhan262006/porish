@@ -1,10 +1,10 @@
-import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import Reveal from "@/components/Reveal";
+import Link from "next/link";
 import ImageStreamHero from "@/components/ImageStreamHero";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import GalleryMasonry from "@/components/GalleryMasonry";
+import Reveal from "@/components/Reveal";
 import { getGalleries, getGalleryBySlug } from "@/lib/content";
 import { SITE_URL, INSTAGRAM, DEFAULT_OG_IMAGE, abs } from "@/lib/seo";
 
@@ -144,37 +144,7 @@ export default async function GalleryPage({
       </section>
       </div>
 
-      {/* Full-bleed masonry: no gutters, so frames of any height pack
-          flush and newly uploaded photos slot in with nowhere to gap. */}
-      <div className="columns-2 gap-0 md:columns-3">
-        {images.map((file, i) => (
-          <Reveal
-            key={file.file}
-            delay={Math.min(i, 6) * 70}
-            className="break-inside-avoid"
-          >
-            <a
-              href={file.file}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`${g.title} photo ${i + 1} of ${images.length} — open full size`}
-              className="block"
-            >
-              <span className="photo relative block bg-[#efe7de]">
-                <Image
-                  src={file.file}
-                  alt={altFor(i)}
-                  width={file.width}
-                  height={file.height}
-                  priority={i < 2}
-                  sizes="(min-width: 768px) 33vw, 50vw"
-                  className="h-auto w-full"
-                />
-              </span>
-            </a>
-          </Reveal>
-        ))}
-      </div>
+      <GalleryMasonry title={g.title} images={images} />
 
       <div className="mx-auto w-full max-w-[1360px] px-5 md:px-10">
       <section className="py-12">
