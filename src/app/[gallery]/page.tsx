@@ -150,7 +150,7 @@ export default async function GalleryPage({
       <section className="py-12">
         <Reveal delay={140} className="text-center">
           <p className="eyebrow">
-            {images.length} photograph{images.length === 1 ? "" : "s"} — {g.title} by Phorish Shoots
+            {g.title} by Phorish Shoots
           </p>
           <nav aria-label="Gallery navigation" className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
             <Link href={`/${prev.slug}`} className="nav-link">
