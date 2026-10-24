@@ -117,9 +117,6 @@ export default function HomeGallery({
       />
 
       <div className="mx-auto mt-8 flex max-w-[1360px] flex-col items-center justify-between gap-4 px-5 sm:flex-row md:px-10">
-          <p className="text-[12px] font-medium tracking-[0.18em] uppercase text-muted">
-            {active.images.length} of {active.total} — {active.title} photography
-          </p>
           <Link href={`/${active.slug}`} aria-label={`Open the full ${active.title} photography gallery`} className="nav-link">
             Open {active.title} gallery
           </Link>
