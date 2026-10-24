@@ -284,24 +284,7 @@ export default function ServiceCarousel({
           <h3 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
             {meta.title} photography
           </h3>
-          <p className="mt-2 text-[0.9375rem] leading-7 text-white/75">{meta.subtitle} Nizamabad · Hyderabad · across India.</p>
-          <dl className="mx-auto mt-8 grid max-w-xl grid-cols-1 gap-0 text-left sm:grid-cols-2 sm:gap-x-12">
-            {[
-              ["Frames", `${meta.frames} in the gallery`],
-              ["Style", meta.style],
-              ["Studio", "Nizamabad · travels"],
-            ].map(([term, value]) => (
-              <div
-                key={term}
-                className="flex items-baseline justify-between gap-6 border-t border-white/10 py-3"
-              >
-                <dt className="text-[11px] tracking-[0.22em] uppercase text-white/60">
-                  {term}
-                </dt>
-                <dd className="text-sm text-white">{value}</dd>
-              </div>
-            ))}
-          </dl>
+          <p className="mt-2 text-[0.9375rem] leading-7 text-white/75">{meta.subtitle}</p>
           <Link
             href={meta.href}
             aria-label={`Open the ${meta.title} photography gallery`}
